@@ -19,6 +19,23 @@
 
   {% include contact.html %}
 
+  {% if sidebar.skills %}
+  <section class="section skills-section">
+    <h2 class="section-title">
+      <span class="fa-stack fa-xs">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fas fa-cogs fa-stack-1x fa-inverse"></i>
+      </span>
+      Skills & Competencies
+    </h2>
+    <div class="skills">
+      {% for skill in sidebar.skills %}
+        <span class="skill-tag">{{ skill }}</span>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
   {% if sidebar.education %}
     {% include education.html %}
   {% endif %}
