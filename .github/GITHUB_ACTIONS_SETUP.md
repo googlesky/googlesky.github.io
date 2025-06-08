@@ -6,7 +6,7 @@ This repository has been configured with automated GitHub Actions deployment for
 
 ### 1. Workflow File
 - **Location**: `.github/workflows/deploy.yml`
-- **Trigger**: Automatic deployment on push to main/master branch
+- **Trigger**: Automatic deployment on push to gh-pages branch
 - **Features**: Ruby 3.1, bundler cache, production build, official GitHub Pages actions
 
 ### 2. Updated Documentation
@@ -22,8 +22,23 @@ This repository has been configured with automated GitHub Actions deployment for
 3. Under **Source**, select **"GitHub Actions"**
 4. Save the settings
 
-### Step 2: Push to Main Branch
-Once you push code to the main branch, the workflow will:
+### Step 2: Use gh-pages Branch Workflow
+The new deployment workflow uses the `gh-pages` branch for controlled deployments:
+
+**Development Process:**
+```bash
+# Work on main branch (no deployment)
+git add .
+git commit -m "Update portfolio content"
+git push origin main
+
+# Deploy when ready
+git checkout gh-pages
+git merge main
+git push origin gh-pages  # This triggers deployment
+```
+
+**What happens on gh-pages push:**
 1. Automatically checkout your code
 2. Setup Ruby 3.1 environment with bundler cache
 3. Configure GitHub Pages settings
@@ -35,7 +50,10 @@ Your site will be available at: `https://googlesky.github.io/landing-page`
 
 ## Workflow Benefits
 
-✅ **Automatic Deployment**: No manual commands needed
+✅ **Manual Control**: Deployment only happens when you deliberately merge to `gh-pages`
+✅ **Clean Main Branch**: No automatic commits or changes to your main development branch
+✅ **Controlled Releases**: You decide exactly when to deploy by merging to `gh-pages`
+✅ **Separate Concerns**: Development happens on main/feature branches, deployment on `gh-pages`
 ✅ **Faster Builds**: Ruby 3.1 with bundler cache
 ✅ **Consistent Environment**: Production settings applied
 ✅ **Error Handling**: Build failures are reported in Actions tab
@@ -51,8 +69,15 @@ Your site will be available at: `https://googlesky.github.io/landing-page`
 
 1. Push this repository to GitHub
 2. Enable GitHub Actions deployment in repository settings
-3. Push to main branch to trigger first deployment
-4. Your Jekyll portfolio will be live automatically!
+3. Create and push to `gh-pages` branch to trigger first deployment:
+   ```bash
+   git checkout -b gh-pages
+   git push origin gh-pages
+   ```
+4. Your Jekyll portfolio will be live!
+5. Use the new workflow for future deployments:
+   - Develop on `main` branch
+   - Merge to `gh-pages` when ready to deploy
 
 ## Troubleshooting
 

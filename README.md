@@ -40,7 +40,7 @@ A professional portfolio website built with Jekyll, featuring a Linux Terminal i
 
 ### Automated GitHub Actions Deployment
 
-This repository includes a GitHub Actions workflow that automatically deploys the Jekyll site to GitHub Pages on every push to the main branch.
+This repository includes a GitHub Actions workflow that automatically deploys the Jekyll site to GitHub Pages when merging to the `gh-pages` branch.
 
 #### Setup Instructions:
 
@@ -49,7 +49,18 @@ This repository includes a GitHub Actions workflow that automatically deploys th
    - Go to Settings → Pages
    - Source: **GitHub Actions** (recommended)
 3. **Update `_config.yml`** with your GitHub Pages URL
-4. **Push to main branch** - deployment happens automatically!
+4. **Development workflow**:
+   ```bash
+   # Develop on main branch
+   git add .
+   git commit -m "Update portfolio content"
+   git push origin main
+   
+   # Deploy when ready
+   git checkout gh-pages
+   git merge main
+   git push origin gh-pages  # This triggers deployment
+   ```
 
 #### Manual Deployment (Alternative):
 
@@ -135,10 +146,11 @@ The interactive terminal supports these commands:
 
 ## GitHub Actions Deployment
 
-This repository uses GitHub Actions for automated deployment to GitHub Pages. The workflow is triggered automatically on every push to the main branch.
+This repository uses GitHub Actions for automated deployment to GitHub Pages. The workflow is triggered automatically on every push to the `gh-pages` branch.
 
 ### Workflow Features:
-- **Automatic Trigger**: Deploys on push to main/master branch
+- **Manual Control**: Deploys only when merging to `gh-pages` branch
+- **Clean Main Branch**: No automatic commits to main development branch
 - **Ruby 3.1 Setup**: Uses Ruby 3.1 with bundler cache for faster builds
 - **Jekyll Build**: Builds the site with production environment
 - **Pages Deploy**: Uses official GitHub Pages actions for deployment

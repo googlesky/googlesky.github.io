@@ -44,10 +44,10 @@ Open your browser to:
 > **✨ This repository now includes automated GitHub Actions deployment!**
 >
 > The automated workflow provides several benefits:
-> - 🚀 **Automatic deployment** on every push to main branch
+> - 🚀 **Controlled deployment** only when merging to `gh-pages` branch
 > - ⚡ **Faster builds** with Ruby 3.1 and bundler cache
 > - 🔒 **Consistent environment** with proper production settings
-> - 🛠️ **No manual commands** needed - just push your code
+> - 🛡️ **Clean main branch** with no automatic commits
 > - 📦 **Proper artifact handling** with official GitHub Pages actions
 
 Choose your preferred deployment method below:
@@ -86,19 +86,31 @@ This repository includes a pre-configured GitHub Actions workflow for automated 
 
 **Automatic Setup:**
 - The workflow is already configured and ready to use
-- Triggers automatically on push to main/master branch
-- No additional setup required - just enable GitHub Actions deployment
+- Triggers only on push to `gh-pages` branch
+- No automatic commits to main branch - keeps development clean
 
 **Workflow Features:**
 - Uses Ruby 3.1 with bundler cache for faster builds
 - Builds Jekyll site with production environment settings
 - Deploys using official GitHub Pages actions
 - Includes proper permissions and concurrency settings
+- Manual control over when deployment happens
 
 **To Enable:**
 1. Go to repository **Settings** → **Pages**
 2. Under **Source**, select **"GitHub Actions"**
-3. Push to main branch - deployment will happen automatically!
+3. Use the new deployment workflow:
+   ```bash
+   # Development on main branch
+   git add .
+   git commit -m "Update portfolio content"
+   git push origin main
+   
+   # Deploy when ready
+   git checkout gh-pages
+   git merge main
+   git push origin gh-pages  # This triggers deployment
+   ```
 
 **Workflow Configuration:**
 ```yaml
@@ -106,9 +118,9 @@ name: Deploy Jekyll to GitHub Pages
 
 on:
   push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+    branches: [ gh-pages ]
+  # Removed main/master triggers to prevent automatic commits
+  # Deployment only happens on manual merge to gh-pages
 
 permissions:
   contents: read

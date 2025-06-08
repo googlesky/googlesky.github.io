@@ -2,9 +2,9 @@ name: Deploy Jekyll to GitHub Pages
 
 on:
   push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+    branches: [ gh-pages ]
+  # Removed main/master triggers to prevent automatic commits
+  # Deployment only happens on manual merge to gh-pages
 
 permissions:
   contents: read
@@ -50,3 +50,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
