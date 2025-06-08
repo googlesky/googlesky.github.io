@@ -1,0 +1,103 @@
+<!-- Skills Section -->
+<section id="skills" class="terminal-section">
+    <div class="prompt">
+        <span class="user">{{ site.data.profile.personal.username }}@{{ site.data.profile.personal.terminal_name }}</span><span class="separator">:</span><span class="path">~</span><span class="dollar">$</span>
+        <span class="command">cat skills.json | jq '.'</span>
+    </div>
+    <div class="command-output">
+        <div class="skills-matrix">
+            <h2 class="section-title"># Technical Skills Matrix</h2>
+            
+            <div class="skill-category">
+                <h3 class="category-title">// Programming Languages</h3>
+                <div class="skill-items">
+                    {% for skill in site.data.profile.skills.programming %}
+                    <span class="skill-item">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="category-title">// CI/CD & Automation</h3>
+                <div class="skill-items">
+                    {% for skill in site.data.profile.skills.cicd_automation %}
+                    <span class="skill-item">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="category-title">// Operating Systems</h3>
+                <div class="skill-items">
+                    {% for skill in site.data.profile.skills.operating_systems %}
+                    <span class="skill-item">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="category-title">// Containers/Virtualization</h3>
+                <div class="skill-items">
+                    {% for skill in site.data.profile.skills.containers_virtualization %}
+                    <span class="skill-item">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="category-title">// Databases</h3>
+                <div class="skill-items">
+                    {% for skill in site.data.profile.skills.databases %}
+                    <span class="skill-item">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="category-title">// Cloud Platforms</h3>
+                <div class="skill-items">
+                    {% for skill in site.data.profile.skills.cloud_platforms %}
+                    <span class="skill-item">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="category-title">// Networking</h3>
+                <div class="skill-items">
+                    {% for skill in site.data.profile.skills.networking %}
+                    <span class="skill-item">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="category-title">// Monitoring/Logging</h3>
+                <div class="skill-items">
+                    {% for skill in site.data.profile.skills.monitoring_logging %}
+                    <span class="skill-item">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="category-title">// Security</h3>
+                <div class="skill-items">
+                    {% for skill in site.data.profile.skills.security %}
+                    <span class="skill-item">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="category-title">// Registry & Proxy</h3>
+                <div class="skill-items">
+                    {% for skill in site.data.profile.skills.registry_proxy %}
+                    <span class="skill-item">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

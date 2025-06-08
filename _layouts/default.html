@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ site.data.profile.personal.name }} - {{ site.data.profile.personal.title }}</title>
+    <meta name="description" content="{{ site.data.profile.personal.name }} - {{ site.data.profile.personal.title }} professional with expertise in AWS, Azure, Kubernetes, Golang, Python, and cloud infrastructure.">
+    <meta name="keywords" content="DevOps, SRE, Site Reliability Engineering, AWS, Azure, Kubernetes, Golang, Python, Docker, Terraform, CI/CD">
+    <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="terminal-container">
+        <!-- Terminal Window Header -->
+        <div class="terminal-header">
+            <div class="terminal-controls">
+                <span class="control close"></span>
+                <span class="control minimize"></span>
+                <span class="control maximize"></span>
+            </div>
+            <div class="terminal-title">{{ site.data.profile.personal.username }}@{{ site.data.profile.personal.terminal_name }}-terminal:~$ Professional Profile</div>
+        </div>
+
+        <!-- Terminal Content -->
+        <div class="terminal-content">
+            {{ content }}
+        </div>
+
+        <!-- Terminal Footer -->
+        <div class="terminal-footer">
+            <div class="status-bar">
+                <span class="status-item">Online</span>
+                <span class="status-item">Available for hire</span>
+                <span class="status-item" id="current-time"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jekyll Data for JavaScript -->
+    <script type="application/json" id="profile-data">
+        {{ site.data.profile | jsonify }}
+    </script>
+    <script src="{{ '/script.js' | relative_url }}"></script>
+</body>
+</html>

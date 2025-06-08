@@ -1,0 +1,47 @@
+title: "Lê Hiếu - Senior DevOps/SRE"
+description: "Professional portfolio with Linux Terminal interface"
+baseurl: ""
+url: "https://yourusername.github.io"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Exclude files
+exclude:
+  - generate.py
+  - requirements.txt
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .gitignore
+
+# Collections - removed conflicting data collection
+# collections:
+#   data:
+#     output: false
+
+# Default layout
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Site settings
+author: "Lê Hiếu"
+email: "HIEULP@1DEVOPS.IO"
+phone: "(084) 975-669-775"
+location: "Thu Duc, Ho Chi Minh City, Vietnam"
+
+# GitHub Pages compatible settings
+safe: true
+incremental: false
+gist:
+  noscript: false

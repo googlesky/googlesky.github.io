@@ -1,0 +1,167 @@
+# Personal Portfolio Data Configuration
+personal:
+  name: "Lê Hiếu"
+  title: "Senior DevOps/SRE"
+  location: "Thu Duc, Ho Chi Minh City, Vietnam"
+  email: "HIEULP@1DEVOPS.IO"
+  phone: "(084) 975-669-775"
+  resume_file: "LePhuongHieu_DevOps_Resume_v3.pdf"
+  username: "hieule"
+  terminal_name: "devops"
+
+social:
+  linkedin: "https://linkedin.com/in/googlesky"
+  github: "https://github.com/googlesky"
+  telegram: "https://t.me/googlesky"
+  gitlab: "https://gitlab.com/googlesky"
+  bitbucket: "https://bitbucket.org/googlesky"
+  stackoverflow: "https://stackoverflow.com/users/9845363/zu-vn"
+
+skills:
+  programming:
+    - "Golang (1 year)"
+    - "Python (3 years)"
+    - "PHP (5 years)"
+    - "Shell Script"
+  
+  cicd_automation:
+    - "Jenkins"
+    - "Gitlab-CI"
+    - "Github"
+    - "Ansible"
+    - "Terraform"
+    - "Helm/Helmfile"
+  
+  operating_systems:
+    - "Linux (Arch, CentOS/RHEL7, Ubuntu)"
+    - "Windows"
+    - "Unix"
+  
+  containers_virtualization:
+    - "Docker"
+    - "Kubernetes"
+    - "Openshift"
+  
+  databases:
+    - "TiDB"
+    - "MySQL/MariaDB"
+    - "PostgreSQL"
+    - "Oracle"
+  
+  cloud_platforms:
+    - "AWS (EC2, S3, RDS, EKS, IAM, SecurityHub)"
+    - "Azure (AKS, PostgreSQL, Alert, WAF)"
+    - "IBM"
+    - "Oracle Cloud"
+  
+  networking:
+    - "Network Design"
+    - "Troubleshooting"
+    - "CCNA"
+    - "PfSense"
+    - "OpenWRT"
+    - "DD-WRT"
+  
+  monitoring_logging:
+    - "Grafana"
+    - "Prometheus"
+    - "ELK"
+    - "Exporter"
+  
+  security:
+    - "DockerSec"
+    - "Prowler"
+    - "Trivy"
+    - "Falco"
+    - "CrowdSec"
+  
+  registry_proxy:
+    - "Nexus"
+    - "JFrog"
+    - "Maven"
+    - "Docker registry"
+    - "HaProxy"
+    - "Nginx"
+    - "Cloudflare"
+
+experience:
+  - company: "Personal Projects (HCMC/Thailand)"
+    position: "Senior DevOps"
+    period: "Dec 2022–Present"
+    description: "Setup/maintain CI/CD for AI models/apps (Jenkins, GitLab-CI). Managed Azure DevOps services (AKS, Storage, VMs, PostgreSQL, MySQL). Migrated AWS to Azure, optimized resources. Led DevOps team, built scalable deployments (Helm, ArgoCD). Enhanced security (DockerSec), managed MongoDB Atlas. Integrated Llama, GPT-4, LLMs. Trained models (YoloV8, lgbm, lstm) for fraud detection, food supply forecasting."
+  
+  - company: "ParcelPerform"
+    position: "Senior DevOps"
+    period: "Jul 2022–Dec 2022"
+    description: "CI/CD with GitLab-CI, GitOps, AWS services, Terraform, Helm. Security with Prowler, Trivy, Falco, OPA, DockerSec. Automated tasks with Bash, Spark/Flink for real-time data."
+  
+  - company: "HomeCredit"
+    position: "Senior DevOps"
+    period: "Jul 2021–Jul 2022"
+    description: "CI/CD for sales systems, Azure services, PostgreSQL, Oracle, WAF. Automated deployments (Python, Golang), managed AKS clusters."
+  
+  - company: "VNG-ZaloPay"
+    position: "Senior DevOps/SRE/SO"
+    period: "Jun 2020–Jul 2021"
+    description: "Managed K8s, TiDB, MySQL, CI/CD (Jenkins), Ansible, Python, Golang. Managed caching/message brokers (Memcache, Redis, Kafka)."
+
+achievements:
+  - title: "CCNA (Cisco Certified Network Associate)"
+    date: "Issued 05-2013"
+  - title: "ACMICPC 2nd Open Source"
+    date: "08-12-2017"
+  - title: "Promoted to DevOps"
+    date: "12-2018"
+  - title: "Developed KBTG CI/CD Framework"
+    date: "09-2019"
+  - title: "Developed ZaloPay CI/CD Framework (Saved ~90% TTM)"
+    date: "01-2020"
+  - title: "Promoted to Senior DevOps"
+    date: "04-2021"
+  - title: "SLA Keeper 99.95% (HomeCredit Salers App)"
+    date: "04-2022"
+  - title: "30% AWS Cost Reduction (ParcelPerform)"
+    date: "11-2022"
+  - title: "Migrated AWS to Azure in 3M"
+    date: "10-2023"
+
+projects:
+  - title: "🚀 Cloud Infrastructure Automation"
+    description: "Designed and implemented Infrastructure as Code using Terraform for multi-cloud environments (AWS, Azure). Automated provisioning, scaling, and monitoring of cloud resources."
+  
+  - title: "🔒 Security-First CI/CD Pipeline"
+    description: "Built comprehensive DevSecOps pipelines with integrated security scanning (Trivy, Prowler), vulnerability assessment, and compliance checks. Reduced security incidents by 80%."
+  
+  - title: "📊 Kubernetes Monitoring Platform"
+    description: "Deployed enterprise-grade monitoring solution using Prometheus, Grafana, and custom dashboards. Improved system observability and reduced MTTR by 60%."
+  
+  - title: "🗄️ Database Performance Optimization"
+    description: "Optimized TiDB and MySQL clusters for high-traffic applications. Implemented automated backup strategies and disaster recovery procedures."
+  
+  - title: "🔧 GitOps Workflow Implementation"
+    description: "Established GitOps practices for application deployment and configuration management. Improved deployment reliability and rollback capabilities."
+
+available_for:
+  - "DevOps Engineering positions"
+  - "Site Reliability Engineering roles"
+  - "Cloud Infrastructure consulting"
+  - "AI/ML Platform engineering"
+  - "Technical architecture discussions"
+
+hire_reasons:
+  - "🚀 8+ years of hands-on DevOps and SRE experience"
+  - "☁️ Multi-cloud expertise (AWS, Azure, IBM, Oracle Cloud)"
+  - "🔒 Security-first mindset with modern security tools"
+  - "📈 Proven track record of improving system reliability (99.95% SLA)"
+  - "🛠️ Full-stack automation from infrastructure to AI/ML deployment"
+  - "📊 Monitoring & observability expertise"
+  - "🤖 AI/ML Platform experience with modern frameworks"
+  - "💰 Cost optimization specialist (30% AWS cost reduction)"
+  - "🎯 Problem solver with strong analytical skills"
+  - "🤝 Collaborative team leader with mentorship experience"
+
+welcome_message: "Welcome to my professional terminal interface!"
+tagline: "Specializing in cloud infrastructure, automation, AI/ML platforms, and security"
+cta_text: "Ready for new DevOps and SRE challenges!"
+cta_description: "Open to discussing cloud infrastructure, automation, AI/ML platforms, and security opportunities."
+hire_conclusion: "Ready to bring reliability, security, and efficiency to your infrastructure!"

@@ -5,6 +5,9 @@ class TerminalEmulator {
         this.terminalInput = document.getElementById('terminal-input');
         this.currentTimeElement = document.getElementById('current-time');
         
+        // Get profile data from Jekyll
+        this.profileData = this.getProfileData();
+        
         this.commands = {
             help: () => this.showHelp(),
             about: () => this.showAbout(),
@@ -33,6 +36,14 @@ class TerminalEmulator {
         this.startTime = new Date();
 
         this.init();
+    }
+
+    getProfileData() {
+        const dataElement = document.getElementById('profile-data');
+        if (dataElement) {
+            return JSON.parse(dataElement.textContent);
+        }
+        return null;
     }
 
     init() {
@@ -91,7 +102,7 @@ class TerminalEmulator {
         commandLine.className = 'terminal-command-line';
         commandLine.innerHTML = `
             <span class="prompt-output">
-                <span class="user">visitor@hieule-terminal</span><span class="separator">:</span><span class="path">~</span><span class="dollar">$</span>
+                <span class="user">visitor@${this.profileData?.personal?.username || 'hieule'}-terminal</span><span class="separator">:</span><span class="path">~</span><span class="dollar">$</span>
             </span>
             <span class="command-text">${command}</span>
         `;
@@ -147,14 +158,16 @@ class TerminalEmulator {
 
     updateTime() {
         const now = new Date();
-        this.currentTimeElement.textContent = now.toLocaleTimeString();
+        if (this.currentTimeElement) {
+            this.currentTimeElement.textContent = now.toLocaleTimeString();
+        }
     }
 
     // Command implementations
     showWelcomeMessage() {
         this.displayOutput(`
             <div class="welcome-msg">
-                <p style="color: #00ffff;">Welcome to Lê Hiếu's Interactive Terminal!</p>
+                <p style="color: #00ffff;">Welcome to ${this.profileData?.personal?.name || 'Lê Hiếu'}'s Interactive Terminal!</p>
                 <p>Type <span style="color: #ffff00;">'help'</span> to see available commands.</p>
                 <p style="color: #888; font-style: italic;">Tip: Use Tab for autocompletion, ↑↓ arrows for command history.</p>
             </div>
@@ -191,228 +204,206 @@ class TerminalEmulator {
     }
 
     showAbout() {
+        const profile = this.profileData?.personal || {};
         this.displayOutput(`
             <div class="about-content">
-                <h3 style="color: #00ffff; margin-bottom: 15px;">About Lê Hiếu</h3>
-                <p><span style="color: #00ff00;">Name:</span> Lê Hiếu</p>
-                <p><span style="color: #00ff00;">Title:</span> Senior DevOps/SRE</p>
-                <p><span style="color: #00ff00;">Email:</span> HIEULP@1DEVOPS.IO</p>
-                <p><span style="color: #00ff00;">Phone:</span> (084) 975-669-775</p>
-                <p><span style="color: #00ff00;">Location:</span> Thu Duc, Ho Chi Minh City, Vietnam</p>
+                <h3 style="color: #00ffff; margin-bottom: 15px;">About ${profile.name || 'Lê Hiếu'}</h3>
+                <p><span style="color: #00ff00;">Name:</span> ${profile.name || 'Lê Hiếu'}</p>
+                <p><span style="color: #00ff00;">Title:</span> ${profile.title || 'Senior DevOps/SRE'}</p>
+                <p><span style="color: #00ff00;">Email:</span> ${profile.email || 'HIEULP@1DEVOPS.IO'}</p>
+                <p><span style="color: #00ff00;">Phone:</span> ${profile.phone || '(084) 975-669-775'}</p>
+                <p><span style="color: #00ff00;">Location:</span> ${profile.location || 'Thu Duc, Ho Chi Minh City, Vietnam'}</p>
                 <p><span style="color: #00ff00;">Experience:</span> 8+ years in DevOps, SRE, and System Administration</p>
                 <p style="margin-top: 15px; color: #cccccc;">
-                    Passionate about cloud infrastructure, automation, AI/ML platforms, security, and building reliable systems at scale.
-                    Experienced with AWS, Azure, Kubernetes, Docker, Terraform, Golang, Python, and various cloud technologies.
+                    ${this.profileData?.tagline || 'Passionate about cloud infrastructure, automation, AI/ML platforms, security, and building reliable systems at scale. Experienced with AWS, Azure, Kubernetes, Docker, Terraform, Golang, Python, and various cloud technologies.'}
                 </p>
             </div>
         `);
     }
 
     showSkills() {
+        const skills = this.profileData?.skills || {};
         this.displayOutput(`
             <div class="skills-content">
                 <h3 style="color: #00ffff; margin-bottom: 15px;">Technical Skills</h3>
                 <div style="margin-bottom: 15px;">
                     <h4 style="color: #ffff00;">Programming Languages:</h4>
-                    <p style="color: #cccccc;">Golang (1 year), Python (3 years), PHP (5 years), Shell Script</p>
+                    <p style="color: #cccccc;">${(skills.programming || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
                     <h4 style="color: #ffff00;">CI/CD & Automation:</h4>
-                    <p style="color: #cccccc;">Jenkins, Gitlab-CI, Github, Ansible, Terraform, Helm/Helmfile</p>
+                    <p style="color: #cccccc;">${(skills.cicd_automation || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
                     <h4 style="color: #ffff00;">Operating Systems:</h4>
-                    <p style="color: #cccccc;">Linux (Arch, CentOS/RHEL7, Ubuntu), Windows, Unix</p>
+                    <p style="color: #cccccc;">${(skills.operating_systems || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
                     <h4 style="color: #ffff00;">Containers/Virtualization:</h4>
-                    <p style="color: #cccccc;">Docker, Kubernetes, Openshift</p>
+                    <p style="color: #cccccc;">${(skills.containers_virtualization || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
                     <h4 style="color: #ffff00;">Databases:</h4>
-                    <p style="color: #cccccc;">TiDB, MySQL/MariaDB, PostgreSQL, Oracle</p>
+                    <p style="color: #cccccc;">${(skills.databases || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
                     <h4 style="color: #ffff00;">Cloud Platforms:</h4>
-                    <p style="color: #cccccc;">AWS (EC2, S3, RDS, EKS, IAM, SecurityHub), Azure (AKS, PostgreSQL, Alert, WAF), IBM, Oracle Cloud</p>
+                    <p style="color: #cccccc;">${(skills.cloud_platforms || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
                     <h4 style="color: #ffff00;">Networking:</h4>
-                    <p style="color: #cccccc;">Network Design, Troubleshooting, CCNA, PfSense, OpenWRT, DD-WRT</p>
+                    <p style="color: #cccccc;">${(skills.networking || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
                     <h4 style="color: #ffff00;">Monitoring/Logging:</h4>
-                    <p style="color: #cccccc;">Grafana, Prometheus, ELK, Exporter</p>
+                    <p style="color: #cccccc;">${(skills.monitoring_logging || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
                     <h4 style="color: #ffff00;">Security:</h4>
-                    <p style="color: #cccccc;">DockerSec, Prowler, Trivy, Falco, CrowdSec</p>
+                    <p style="color: #cccccc;">${(skills.security || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
                     <h4 style="color: #ffff00;">Registry & Proxy:</h4>
-                    <p style="color: #cccccc;">Nexus, JFrog, Maven, Docker registry, HaProxy, Nginx, Cloudflare</p>
+                    <p style="color: #cccccc;">${(skills.registry_proxy || []).join(', ')}</p>
                 </div>
             </div>
         `);
     }
 
     showExperience() {
-        this.displayOutput(`
+        const experience = this.profileData?.experience || [];
+        let experienceHtml = `
             <div class="experience-content">
                 <h3 style="color: #00ffff; margin-bottom: 15px;">Professional Experience</h3>
+        `;
+        
+        experience.forEach(job => {
+            experienceHtml += `
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">Personal Projects (HCMC/Thailand) — Senior DevOps (Dec 2022–Present)</h4>
-                    <p style="color: #cccccc;">Setup/maintain CI/CD for AI models/apps (Jenkins, GitLab-CI). Managed Azure DevOps services (AKS, Storage, VMs, PostgreSQL, MySQL). Migrated AWS to Azure, optimized resources. Led DevOps team, built scalable deployments (Helm, ArgoCD). Enhanced security (DockerSec), managed MongoDB Atlas. Integrated Llama, GPT-4, LLMs. Trained models (YoloV8, lgbm, lstm) for fraud detection, food supply forecasting.</p>
+                    <h4 style="color: #ffff00;">${job.company} — ${job.position} (${job.period})</h4>
+                    <p style="color: #cccccc;">${job.description}</p>
                 </div>
-                <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">ParcelPerform — Senior DevOps (Jul 2022–Dec 2022)</h4>
-                    <p style="color: #cccccc;">CI/CD with GitLab-CI, GitOps, AWS services, Terraform, Helm. Security with Prowler, Trivy, Falco, OPA, DockerSec. Automated tasks with Bash, Spark/Flink for real-time data.</p>
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">HomeCredit — Senior DevOps (Jul 2021–Jul 2022)</h4>
-                    <p style="color: #cccccc;">CI/CD for sales systems, Azure services, PostgreSQL, Oracle, WAF. Automated deployments (Python, Golang), managed AKS clusters.</p>
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">VNG-ZaloPay — Senior DevOps/SRE/SO (Jun 2020–Jul 2021)</h4>
-                    <p style="color: #cccccc;">Managed K8s, TiDB, MySQL, CI/CD (Jenkins), Ansible, Python, Golang. Managed caching/message brokers (Memcache, Redis, Kafka).</p>
-                </div>
-            </div>
-        `);
+            `;
+        });
+        
+        experienceHtml += '</div>';
+        this.displayOutput(experienceHtml);
     }
 
     showAchievements() {
-        this.displayOutput(`
+        const achievements = this.profileData?.achievements || [];
+        let achievementsHtml = `
             <div class="achievements-content">
                 <h3 style="color: #00ffff; margin-bottom: 15px;">🏆 Professional Achievements & Certifications</h3>
+        `;
+        
+        achievements.forEach(achievement => {
+            achievementsHtml += `
                 <div class="achievement-item">
-                    <span class="achievement-date">2023-10</span> 🌟 <span class="achievement-title">Migrated AWS to Azure in 3M</span>
+                    <span class="achievement-date">${achievement.date}</span> 🌟 <span class="achievement-title">${achievement.title}</span>
                 </div>
-                <div class="achievement-item">
-                    <span class="achievement-date">2022-11</span> 💰 <span class="achievement-title">30% AWS Cost Reduction (ParcelPerform)</span>
-                </div>
-                <div class="achievement-item">
-                    <span class="achievement-date">2022-04</span> 📊 <span class="achievement-title">SLA Keeper 99.95% (HomeCredit Salers App)</span>
-                </div>
-                <div class="achievement-item">
-                    <span class="achievement-date">2021-04</span> 🚀 <span class="achievement-title">Promoted to Senior DevOps</span>
-                </div>
-                <div class="achievement-item">
-                    <span class="achievement-date">2020-01</span> 🔧 <span class="achievement-title">Developed ZaloPay CI/CD Framework (Saved ~90% TTM)</span>
-                </div>
-                <div class="achievement-item">
-                    <span class="achievement-date">2019-09</span> 🔧 <span class="achievement-title">Developed KBTG CI/CD Framework</span>
-                </div>
-                <div class="achievement-item">
-                    <span class="achievement-date">2018-12</span> 🚀 <span class="achievement-title">Promoted to DevOps</span>
-                </div>
-                <div class="achievement-item">
-                    <span class="achievement-date">2017-12</span> 🏅 <span class="achievement-title">ACMICPC 2nd Open Source</span>
-                </div>
-                <div class="achievement-item">
-                    <span class="achievement-date">2013-05</span> 🎓 <span class="achievement-title">CCNA (Cisco Certified Network Associate)</span>
-                </div>
-            </div>
-        `);
+            `;
+        });
+        
+        achievementsHtml += '</div>';
+        this.displayOutput(achievementsHtml);
     }
 
     showProjects() {
-        this.displayOutput(`
+        const projects = this.profileData?.projects || [];
+        let projectsHtml = `
             <div class="projects-content">
                 <h3 style="color: #00ffff; margin-bottom: 15px;">Notable Projects</h3>
+        `;
+        
+        projects.forEach(project => {
+            projectsHtml += `
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">🚀 Cloud Infrastructure Automation</h4>
-                    <p style="color: #cccccc;">Designed and implemented Infrastructure as Code using Terraform for multi-cloud environments (AWS, Azure). Automated provisioning, scaling, and monitoring of cloud resources.</p>
+                    <h4 style="color: #ffff00;">${project.title}</h4>
+                    <p style="color: #cccccc;">${project.description}</p>
                 </div>
-                <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">🔒 Security-First CI/CD Pipeline</h4>
-                    <p style="color: #cccccc;">Built comprehensive DevSecOps pipelines with integrated security scanning (Trivy, Prowler), vulnerability assessment, and compliance checks. Reduced security incidents by 80%.</p>
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">📊 Kubernetes Monitoring Platform</h4>
-                    <p style="color: #cccccc;">Deployed enterprise-grade monitoring solution using Prometheus, Grafana, and custom dashboards. Improved system observability and reduced MTTR by 60%.</p>
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">🗄️ Database Performance Optimization</h4>
-                    <p style="color: #cccccc;">Optimized TiDB and MySQL clusters for high-traffic applications. Implemented automated backup strategies and disaster recovery procedures.</p>
-                </div>                <div>
-                    <h4 style="color: #ffff00;">🔧 GitOps Workflow Implementation</h4>
-                    <p style="color: #cccccc;">Established GitOps practices for application deployment and configuration management. Improved deployment reliability and rollback capabilities.</p>
-                </div>
-            </div>
-        `);
+            `;
+        });
+        
+        projectsHtml += '</div>';
+        this.displayOutput(projectsHtml);
     }
 
     showContact() {
+        const profile = this.profileData?.personal || {};
+        const availableFor = this.profileData?.available_for || [];
+        
         this.displayOutput(`
             <div class="contact-content">
                 <h3 style="color: #00ffff; margin-bottom: 15px;">Contact Information</h3>
-                <p><span style="color: #00ff00;">📧 Email:</span> <a href="mailto:HIEULP@1DEVOPS.IO" style="color: #ffff00;">HIEULP@1DEVOPS.IO</a></p>
-                <p><span style="color: #00ff00;">📞 Phone:</span> <a href="tel:+84975669775" style="color: #ffff00;">(084) 975-669-775</a></p>
-                <p><span style="color: #00ff00;">🌍 Location:</span> Thu Duc, Ho Chi Minh City, Vietnam</p>
-                <p><span style="color: #00ff00;">📄 Resume:</span> <a href="LePhuongHieu_DevOps_Resume_v3.pdf" target="_blank" style="color: #ffff00;">Download PDF</a></p>
+                <p><span style="color: #00ff00;">📧 Email:</span> <a href="mailto:${profile.email}" style="color: #ffff00;">${profile.email}</a></p>
+                <p><span style="color: #00ff00;">📞 Phone:</span> <a href="tel:${profile.phone?.replace(/[^\d+]/g, '')}" style="color: #ffff00;">${profile.phone}</a></p>
+                <p><span style="color: #00ff00;">🌍 Location:</span> ${profile.location}</p>
+                <p><span style="color: #00ff00;">📄 Resume:</span> <a href="${profile.resume_file}" target="_blank" style="color: #ffff00;">Download PDF</a></p>
                 <br>
                 <p style="color: #00ffff;">💡 Available for:</p>
                 <ul style="color: #cccccc; margin-left: 20px;">
-                    <li>DevOps Engineering positions</li>
-                    <li>Site Reliability Engineering roles</li>
-                    <li>Cloud Infrastructure consulting</li>
-                    <li>AI/ML Platform engineering</li>
-                    <li>Technical architecture discussions</li>
+                    ${availableFor.map(item => `<li>${item}</li>`).join('')}
                 </ul>
             </div>
         `);
     }
 
     showSocial() {
+        const social = this.profileData?.social || {};
         this.displayOutput(`
             <div class="social-content">
                 <h3 style="color: #00ffff; margin-bottom: 15px;">Social Networks</h3>
-                <p><span style="color: #00ff00;">💼 LinkedIn:</span> <a href="https://linkedin.com/in/googlesky" target="_blank" style="color: #ffff00;">linkedin.com/in/googlesky</a></p>
-                <p><span style="color: #00ff00;">🐙 GitHub:</span> <a href="https://github.com/googlesky" target="_blank" style="color: #ffff00;">github.com/googlesky</a></p>
-                <p><span style="color: #00ff00;">✈️ Telegram:</span> <a href="https://t.me/googlesky" target="_blank" style="color: #ffff00;">t.me/googlesky</a></p>
-                <p><span style="color: #00ff00;">🦊 GitLab:</span> <a href="https://gitlab.com/googlesky" target="_blank" style="color: #ffff00;">gitlab.com/googlesky</a></p>
-                <p><span style="color: #00ff00;">🪣 Bitbucket:</span> <a href="https://bitbucket.org/googlesky" target="_blank" style="color: #ffff00;">bitbucket.org/googlesky</a></p>
-                <p><span style="color: #00ff00;">📚 Stack Overflow:</span> <a href="https://stackoverflow.com/users/9845363/zu-vn" target="_blank" style="color: #ffff00;">stackoverflow.com/users/9845363/zu-vn</a></p>
+                <p><span style="color: #00ff00;">💼 LinkedIn:</span> <a href="${social.linkedin}" target="_blank" style="color: #ffff00;">${social.linkedin}</a></p>
+                <p><span style="color: #00ff00;">🐙 GitHub:</span> <a href="${social.github}" target="_blank" style="color: #ffff00;">${social.github}</a></p>
+                <p><span style="color: #00ff00;">✈️ Telegram:</span> <a href="${social.telegram}" target="_blank" style="color: #ffff00;">${social.telegram}</a></p>
+                <p><span style="color: #00ff00;">🦊 GitLab:</span> <a href="${social.gitlab}" target="_blank" style="color: #ffff00;">${social.gitlab}</a></p>
+                <p><span style="color: #00ff00;">🪣 Bitbucket:</span> <a href="${social.bitbucket}" target="_blank" style="color: #ffff00;">${social.bitbucket}</a></p>
+                <p><span style="color: #00ff00;">📚 Stack Overflow:</span> <a href="${social.stackoverflow}" target="_blank" style="color: #ffff00;">${social.stackoverflow}</a></p>
             </div>
         `);
     }
 
     downloadResume() {
+        const profile = this.profileData?.personal || {};
         this.displayOutput(`
             <div class="resume-content">
                 <p style="color: #00ffff;">📄 Opening resume download...</p>
-                <p style="color: #cccccc;">File: LePhuongHieu_DevOps_Resume_v3.pdf</p>
-                <p><a href="LePhuongHieu_DevOps_Resume_v3.pdf" target="_blank" style="color: #ffff00;">Click here if download doesn't start automatically</a></p>
+                <p style="color: #cccccc;">File: ${profile.resume_file}</p>
+                <p><a href="${profile.resume_file}" target="_blank" style="color: #ffff00;">Click here if download doesn't start automatically</a></p>
             </div>
         `);
         
         // Simulate download
         setTimeout(() => {
-            window.open('LePhuongHieu_DevOps_Resume_v3.pdf', '_blank');
+            window.open(profile.resume_file, '_blank');
         }, 1000);
     }
 
     hireMe() {
-        this.displayOutput(`
+        const hireReasons = this.profileData?.hire_reasons || [];
+        const profile = this.profileData?.personal || {};
+        const conclusion = this.profileData?.hire_conclusion || '';
+        
+        let hireHtml = `
             <div class="hire-content">
-                <h3 style="color: #00ffff; margin-bottom: 15px;">Why Hire Lê Hiếu?</h3>
+                <h3 style="color: #00ffff; margin-bottom: 15px;">Why Hire ${profile.name || 'Lê Hiếu'}?</h3>
                 <ul style="color: #cccccc; margin-left: 20px;">
-                    <li>🚀 8+ years of hands-on DevOps and SRE experience</li>
-                    <li>☁️ Multi-cloud expertise (AWS, Azure, IBM, Oracle Cloud)</li>
-                    <li>🔒 Security-first mindset with modern security tools</li>
-                    <li>📈 Proven track record of improving system reliability (99.95% SLA)</li>
-                    <li>🛠️ Full-stack automation from infrastructure to AI/ML deployment</li>
-                    <li>📊 Monitoring & observability expertise</li>
-                    <li>🤖 AI/ML Platform experience with modern frameworks</li>
-                    <li>💰 Cost optimization specialist (30% AWS cost reduction)</li>
-                    <li>🎯 Problem solver with strong analytical skills</li>
-                    <li>🤝 Collaborative team leader with mentorship experience</li>
+        `;
+        
+        hireReasons.forEach(reason => {
+            hireHtml += `<li>${reason}</li>`;
+        });
+        
+        hireHtml += `
                 </ul>
                 <br>
-                <p style="color: #00ff00;">Ready to bring reliability, security, and efficiency to your infrastructure!</p>
-                <p style="color: #ffff00;">Contact: HIEULP@1DEVOPS.IO | (084) 975-669-775</p>
+                <p style="color: #00ff00;">${conclusion}</p>
+                <p style="color: #ffff00;">Contact: ${profile.email} | ${profile.phone}</p>
             </div>
-        `);
+        `;
+        
+        this.displayOutput(hireHtml);
     }
 
     clearTerminal() {
@@ -425,20 +416,24 @@ class TerminalEmulator {
     }
 
     printWorkingDirectory() {
-        this.displayOutput('<span style="color: #00ffff;">/home/hieule/portfolio</span>');
+        const username = this.profileData?.personal?.username || 'hieule';
+        this.displayOutput(`<span style="color: #00ffff;">/home/${username}/portfolio</span>`);
     }
 
     listDirectory() {
+        const username = this.profileData?.personal?.username || 'hieule';
+        const resumeFile = this.profileData?.personal?.resume_file || 'LePhuongHieu_DevOps_Resume_v3.pdf';
+        
         this.displayOutput(`
             <div style="color: #cccccc;">
-                <div style="color: #00ffff;">drwxr-xr-x 2 hieule hieule 4096 Dec  7 16:10 <span style="color: #ffff00;">about/</span></div>
-                <div style="color: #00ffff;">drwxr-xr-x 2 hieule hieule 4096 Dec  7 16:10 <span style="color: #ffff00;">skills/</span></div>
-                <div style="color: #00ffff;">drwxr-xr-x 2 hieule hieule 4096 Dec  7 16:10 <span style="color: #ffff00;">experience/</span></div>
-                <div style="color: #00ffff;">drwxr-xr-x 2 hieule hieule 4096 Dec  7 16:10 <span style="color: #ffff00;">achievements/</span></div>
-                <div style="color: #00ffff;">drwxr-xr-x 2 hieule hieule 4096 Dec  7 16:10 <span style="color: #ffff00;">projects/</span></div>
-                <div style="color: #00ffff;">-rw-r--r-- 1 hieule hieule 2048 Dec  7 16:10 <span style="color: #ffffff;">README.md</span></div>
-                <div style="color: #00ffff;">-rw-r--r-- 1 hieule hieule 1024 Dec  7 16:10 <span style="color: #ffffff;">contact.txt</span></div>
-                <div style="color: #00ffff;">-rw-r--r-- 1 hieule hieule 4096 Dec  7 16:10 <span style="color: #ff0000;">LePhuongHieu_DevOps_Resume_v3.pdf</span></div>
+                <div style="color: #00ffff;">drwxr-xr-x 2 ${username} ${username} 4096 Dec  7 16:10 <span style="color: #ffff00;">about/</span></div>
+                <div style="color: #00ffff;">drwxr-xr-x 2 ${username} ${username} 4096 Dec  7 16:10 <span style="color: #ffff00;">skills/</span></div>
+                <div style="color: #00ffff;">drwxr-xr-x 2 ${username} ${username} 4096 Dec  7 16:10 <span style="color: #ffff00;">experience/</span></div>
+                <div style="color: #00ffff;">drwxr-xr-x 2 ${username} ${username} 4096 Dec  7 16:10 <span style="color: #ffff00;">achievements/</span></div>
+                <div style="color: #00ffff;">drwxr-xr-x 2 ${username} ${username} 4096 Dec  7 16:10 <span style="color: #ffff00;">projects/</span></div>
+                <div style="color: #00ffff;">-rw-r--r-- 1 ${username} ${username} 2048 Dec  7 16:10 <span style="color: #ffffff;">README.md</span></div>
+                <div style="color: #00ffff;">-rw-r--r-- 1 ${username} ${username} 1024 Dec  7 16:10 <span style="color: #ffffff;">contact.txt</span></div>
+                <div style="color: #00ffff;">-rw-r--r-- 1 ${username} ${username} 4096 Dec  7 16:10 <span style="color: #ff0000;">${resumeFile}</span></div>
             </div>
         `);
     }
@@ -450,10 +445,12 @@ class TerminalEmulator {
         }
 
         const filename = args[0].toLowerCase();
+        const profile = this.profileData?.personal || {};
+        
         const files = {
-            'readme.md': 'Welcome to Lê Hiếu\'s Professional Portfolio\n\nA passionate DevOps and SRE professional with expertise in cloud infrastructure, automation, AI/ML platforms, and security.',
-            'contact.txt': 'Email: HIEULP@1DEVOPS.IO\nPhone: (084) 975-669-775\nLocation: Thu Duc, Ho Chi Minh City, Vietnam\nLinkedIn: linkedin.com/in/googlesky\nGitHub: github.com/googlesky',
-            'about.txt': 'Lê Hiếu - Senior DevOps/SRE\n8+ years of experience in DevOps, SRE, and System Administration'
+            'readme.md': `Welcome to ${profile.name || 'Lê Hiếu'}'s Professional Portfolio\n\nA passionate DevOps and SRE professional with expertise in cloud infrastructure, automation, AI/ML platforms, and security.`,
+            'contact.txt': `Email: ${profile.email}\nPhone: ${profile.phone}\nLocation: ${profile.location}\nLinkedIn: ${this.profileData?.social?.linkedin}\nGitHub: ${this.profileData?.social?.github}`,
+            'about.txt': `${profile.name || 'Lê Hiếu'} - ${profile.title || 'Senior DevOps/SRE'}\n8+ years of experience in DevOps, SRE, and System Administration`
         };
 
         if (files[filename]) {
@@ -487,6 +484,9 @@ class TerminalEmulator {
     }
 
     showNeofetch() {
+        const profile = this.profileData?.personal || {};
+        const skills = this.profileData?.skills || {};
+        
         this.displayOutput(`
             <div class="neofetch-content" style="display: flex; gap: 20px;">
                 <pre style="color: #00ffff; font-size: 10px;">
@@ -495,14 +495,13 @@ class TerminalEmulator {
      \`-'\`   \`-'\`   \`-'\`   \`-'\`   \`-'\`
                 </pre>
                 <div style="color: #cccccc;">
-                    <p><span style="color: #00ff00;">User:</span> Lê Hiếu</p>
-                    <p><span style="color: #00ff00;">Title:</span> Senior DevOps/SRE</p>
+                    <p><span style="color: #00ff00;">User:</span> ${profile.name || 'Lê Hiếu'}</p>
+                    <p><span style="color: #00ff00;">Title:</span> ${profile.title || 'Senior DevOps/SRE'}</p>
                     <p><span style="color: #00ff00;">OS:</span> Linux Terminal Environment</p>
                     <p><span style="color: #00ff00;">Shell:</span> Interactive Portfolio Terminal</p>
-                    <p><span style="color: #00ff00;">Languages:</span> Golang, Python, PHP, Shell Script</p>
-                    <p><span style="color: #00ff00;">Cloud:</span> AWS, Azure, IBM, Oracle Cloud</p>
-                    <p><span style="color: #00ff00;">DevOps:</span> Docker, Kubernetes, Terraform</p>
-                    <p><span style="color: #00ff00;">AI/ML:</span> LLMs, YoloV8, lgbm, lstm</p>
+                    <p><span style="color: #00ff00;">Languages:</span> ${(skills.programming || []).join(', ')}</p>
+                    <p><span style="color: #00ff00;">Cloud:</span> ${(skills.cloud_platforms || []).join(', ')}</p>
+                    <p><span style="color: #00ff00;">DevOps:</span> ${(skills.containers_virtualization || []).join(', ')}</p>
                     <p><span style="color: #00ff00;">Status:</span> Available for hire</p>
                 </div>
             </div>
@@ -516,13 +515,15 @@ class TerminalEmulator {
         }
 
         const command = args[0];
+        const profile = this.profileData?.personal || {};
+        
         if (command === 'hire') {
             this.displayOutput(`
                 <div style="color: #ff0000;">
                     <p>[sudo] password for visitor: ••••••••</p>
                     <p style="color: #00ff00;">Access granted! Executing privileged hire command...</p>
                     <p style="color: #ffff00;">🚨 ALERT: Exceptional DevOps engineer detected!</p>
-                    <p style="color: #00ffff;">Contact HIEULP@1DEVOPS.IO immediately for interview.</p>
+                    <p style="color: #00ffff;">Contact ${profile.email} immediately for interview.</p>
                 </div>
             `);
         } else {

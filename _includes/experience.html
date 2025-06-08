@@ -1,0 +1,23 @@
+<!-- Experience Section -->
+<section id="experience" class="terminal-section">
+    <div class="prompt">
+        <span class="user">{{ site.data.profile.personal.username }}@{{ site.data.profile.personal.terminal_name }}</span><span class="separator">:</span><span class="path">~</span><span class="dollar">$</span>
+        <span class="command">tail -f /var/log/career.log</span>
+    </div>
+    <div class="command-output">
+        <div class="experience-timeline">
+            <h2 class="section-title"># Professional Experience</h2>
+            
+            {% for job in site.data.profile.experience %}
+            <div class="log-entry">
+                <div class="log-timestamp">[{{ job.period }}]</div>
+                <div class="log-content">
+                    <h3 class="company">{{ job.company }} — {{ job.position }}</h3>
+                    <p>{{ job.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>

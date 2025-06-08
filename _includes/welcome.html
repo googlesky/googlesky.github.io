@@ -1,0 +1,66 @@
+<!-- Welcome Section -->
+<section id="welcome" class="terminal-section">
+    <div class="prompt">
+        <span class="user">{{ site.data.profile.personal.username }}@{{ site.data.profile.personal.terminal_name }}</span><span class="separator">:</span><span class="path">~</span><span class="dollar">$</span>
+    </div>
+    <div class="command-output">
+        <pre class="ascii-art">
+██╗     ███████╗    ██╗  ██╗██╗███████╗██╗   ██╗
+██║     ██╔════╝    ██║  ██║██║██╔════╝██║   ██║
+██║     █████╗      ███████║██║█████╗  ██║   ██║
+██║     ██╔══╝      ██╔══██║██║██╔══╝  ██║   ██║
+███████╗███████╗    ██║  ██║██║███████╗╚██████╔╝
+╚══════╝╚══════╝    ╚═╝  ╚═╝╚═╝╚══════╝ ╚═════╝
+        </pre>
+        <div class="typing-text">
+            <p>{{ site.data.profile.welcome_message }}</p>
+            <p>I'm {{ site.data.profile.personal.name }}, a {{ site.data.profile.personal.title }}</p>
+            <p>{{ site.data.profile.tagline }}</p>
+            <p class="hint">Type 'help' to see available commands<span class="cursor">_</span></p>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="terminal-section">
+    <div class="prompt">
+        <span class="user">{{ site.data.profile.personal.username }}@{{ site.data.profile.personal.terminal_name }}</span><span class="separator">:</span><span class="path">~</span><span class="dollar">$</span>
+        <span class="command">cat about.txt</span>
+    </div>
+    <div class="command-output">
+        <div class="info-card">
+            <h2 class="section-title"># Professional Profile</h2>
+            <div class="profile-info">
+                <p><span class="label">Name:</span> {{ site.data.profile.personal.name }}</p>
+                <p><span class="label">Title:</span> {{ site.data.profile.personal.title }}</p>
+                <p><span class="label">Location:</span> {{ site.data.profile.personal.location }}</p>
+                <p><span class="label">Email:</span> <a href="mailto:{{ site.data.profile.personal.email }}">{{ site.data.profile.personal.email }}</a></p>
+                <p><span class="label">Phone:</span> <a href="tel:{{ site.data.profile.personal.phone | replace: ' ', '' | replace: '(', '' | replace: ')', '' | replace: '-', '' }}">{{ site.data.profile.personal.phone }}</a></p>
+                <p><span class="label">Resume:</span> <a href="{{ site.data.profile.personal.resume_file }}" target="_blank">{{ site.data.profile.personal.resume_file }}</a></p>
+            </div>
+            <div class="social-links">
+                <h3>// Social Networks</h3>
+                <div class="social-grid">
+                    <a href="{{ site.data.profile.social.linkedin }}" target="_blank" class="social-link">
+                        <span class="social-icon">💼</span> LinkedIn/googlesky
+                    </a>
+                    <a href="{{ site.data.profile.social.github }}" target="_blank" class="social-link">
+                        <span class="social-icon">🐙</span> GitHub/googlesky
+                    </a>
+                    <a href="{{ site.data.profile.social.telegram }}" target="_blank" class="social-link">
+                        <span class="social-icon">✈️</span> Telegram/googlesky
+                    </a>
+                    <a href="{{ site.data.profile.social.gitlab }}" target="_blank" class="social-link">
+                        <span class="social-icon">🦊</span> GitLab/googlesky
+                    </a>
+                    <a href="{{ site.data.profile.social.bitbucket }}" target="_blank" class="social-link">
+                        <span class="social-icon">🪣</span> Bitbucket/googlesky
+                    </a>
+                    <a href="{{ site.data.profile.social.stackoverflow }}" target="_blank" class="social-link">
+                        <span class="social-icon">📚</span> StackOverflow/zu-vn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

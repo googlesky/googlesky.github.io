@@ -1,112 +1,174 @@
-# Portfolio Generator
+# Jekyll Portfolio - Lê Hiếu
 
-Một hệ thống đơn giản để tạo landing page portfolio từ file YAML configuration.
+A professional portfolio website built with Jekyll, featuring a Linux Terminal interface design. This portfolio showcases DevOps/SRE expertise and is optimized for GitHub Pages deployment.
 
-## Cách sử dụng
+## Features
 
-### 1. Cài đặt dependencies
+- 🖥️ **Linux Terminal Interface**: Authentic terminal-style design with interactive commands
+- 📱 **Responsive Design**: Mobile-friendly layout that works on all devices
+- ⚡ **Fast Loading**: Optimized for performance with Jekyll static site generation
+- 🔍 **SEO Optimized**: Proper meta tags and structured data
+- 🎨 **Modern Styling**: Clean, professional appearance with terminal aesthetics
+- 🤖 **Interactive Terminal**: Real terminal commands for exploring the portfolio
 
-```bash
-pip install -r requirements.txt
-```
+## Technology Stack
 
-### 2. Chỉnh sửa thông tin cá nhân
+- **Jekyll 4.3.2**: Static site generator
+- **GitHub Pages**: Hosting and deployment
+- **Liquid Templating**: Dynamic content generation
+- **YAML Data Files**: Structured content management
+- **CSS3**: Modern styling with flexbox and grid
+- **JavaScript ES6**: Interactive terminal functionality
 
-Mở file `data.yaml` và cập nhật thông tin của bạn:
+## Quick Start
+
+### Local Development
+
+1. **Install Dependencies**
+   ```bash
+   # Install Ruby and Bundler first
+   bundle install
+   ```
+
+2. **Run Development Server**
+   ```bash
+   bundle exec jekyll serve
+   ```
+
+3. **View the Site**
+   Open `http://localhost:4000` in your browser
+
+### GitHub Pages Deployment
+
+1. **Fork/Clone this repository**
+2. **Enable GitHub Pages** in repository settings
+3. **Configure the source** to deploy from the main branch
+4. **Update `_config.yml`** with your GitHub Pages URL
+
+## Configuration
+
+### Site Configuration
+
+Edit `_config.yml` to customize:
 
 ```yaml
-personal:
-  name: "Tên của bạn"
-  title: "Chức vụ"
-  location: "Địa chỉ"
-  email: "email@example.com"
-  phone: "Số điện thoại"
-  # ... các thông tin khác
+title: "Your Name - Your Title"
+description: "Your professional description"
+url: "https://yourusername.github.io"
+baseurl: ""
 ```
 
-### 3. Generate website
+### Profile Data
 
-Chạy script để tạo ra file HTML và JavaScript:
+All profile information is stored in `_data/profile.yml`:
 
-```bash
-python generate.py
+- **Personal Information**: Name, title, contact details
+- **Skills**: Technical skills organized by category
+- **Experience**: Professional work history
+- **Achievements**: Certifications and accomplishments
+- **Projects**: Notable projects and contributions
+- **Social Links**: Professional social media profiles
+
+### Customization
+
+1. **Update Profile Data**: Edit `_data/profile.yml` with your information
+2. **Customize Styling**: Modify `style.css` for visual changes
+3. **Add Features**: Extend `script.js` for additional terminal commands
+4. **Update Resume**: Replace the resume file referenced in the profile data
+
+## File Structure
+
+```
+├── _config.yml          # Jekyll configuration
+├── _data/
+│   └── profile.yml      # Profile data
+├── _includes/
+│   ├── achievements.html # Achievements section
+│   ├── experience.html   # Experience section
+│   └── terminal.html     # Main terminal interface
+├── _layouts/
+│   └── default.html     # Main layout template
+├── _site/               # Generated site (ignored)
+├── index.html           # Homepage
+├── script.js            # Interactive terminal
+├── style.css            # Styling
+├── Gemfile              # Ruby dependencies
+└── README.md            # This file
 ```
 
-### 4. Xem kết quả
+## Terminal Commands
 
-Mở file `index.html` trong trình duyệt để xem portfolio của bạn.
+The interactive terminal supports these commands:
 
-## Cấu trúc file
+- `help` - Show available commands
+- `about` - Display profile information
+- `skills` - Show technical skills
+- `experience` - Display work experience
+- `achievements` - Show achievements & certifications
+- `projects` - Show project portfolio
+- `contact` - Get contact information
+- `social` - Show social media links
+- `resume` - Download resume
+- `hire` - Why you should hire me
+- `clear` - Clear terminal screen
+- `whoami` - Display current user
+- `pwd` - Print working directory
+- `ls` - List directory contents
+- `date` - Show current date and time
+- `uptime` - Show system uptime
+- `neofetch` - Display system information
+- `cat [file]` - Display file contents
+- `echo [text]` - Display text
 
-- `data.yaml` - File cấu hình chứa tất cả thông tin cá nhân
-- `generate.py` - Script Python để generate HTML và JS
-- `style.css` - File CSS (không cần thay đổi)
-- `index.html` - File HTML được generate (không chỉnh sửa trực tiếp)
-- `script.js` - File JavaScript được generate (không chỉnh sửa trực tiếp)
+## GitHub Pages Setup
 
-## Các phần có thể tùy chỉnh trong data.yaml
+1. **Repository Settings**:
+   - Go to Settings → Pages
+   - Source: Deploy from a branch
+   - Branch: main / (root)
 
-### Personal Information
-- `name`: Tên đầy đủ
-- `title`: Chức vụ hiện tại
-- `location`: Địa chỉ
-- `email`: Email liên hệ
-- `phone`: Số điện thoại
-- `resume_file`: Tên file CV
-- `username`: Username cho terminal
-- `terminal_name`: Tên terminal
+2. **Custom Domain** (optional):
+   - Add CNAME file with your domain
+   - Configure DNS settings
 
-### Social Links
-- `linkedin`, `github`, `telegram`, `gitlab`, `bitbucket`, `stackoverflow`
+3. **SSL/HTTPS**:
+   - Automatically enabled for github.io domains
+   - Configure SSL for custom domains
 
-### Skills
-Chia thành các category:
-- `programming`: Ngôn ngữ lập trình
-- `cicd_automation`: CI/CD & Automation
-- `operating_systems`: Hệ điều hành
-- `containers_virtualization`: Containers/Virtualization
-- `databases`: Cơ sở dữ liệu
-- `cloud_platforms`: Nền tảng cloud
-- `networking`: Mạng
-- `monitoring_logging`: Monitoring/Logging
-- `security`: Bảo mật
-- `registry_proxy`: Registry & Proxy
+## Performance Optimizations
 
-### Experience
-Danh sách kinh nghiệm làm việc:
-```yaml
-- company: "Tên công ty"
-  position: "Vị trí"
-  period: "Thời gian"
-  description: "Mô tả công việc"
-```
+- **Lazy Loading**: Animations load when elements come into view
+- **Minified Assets**: CSS and JS are optimized for production
+- **Image Optimization**: Properly sized and compressed images
+- **Caching**: Browser caching headers for static assets
 
-### Projects
-Danh sách dự án:
-```yaml
-- title: "Tên dự án"
-  description: "Mô tả dự án"
-```
+## Browser Support
 
-### Achievements
-Danh sách thành tích và chứng chỉ
+- Chrome/Chromium (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+- Mobile browsers (iOS Safari, Chrome Mobile)
 
-### Available For & Hire Reasons
-Các vị trí mong muốn và lý do nên tuyển dụng
+## Contributing
 
-## Lợi ích
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-✅ **Dễ bảo trì**: Chỉ cần chỉnh sửa file YAML  
-✅ **Tự động hóa**: Chạy 1 lệnh để generate toàn bộ website  
-✅ **Nhất quán**: Đảm bảo format và style đồng nhất  
-✅ **Tiết kiệm thời gian**: Không cần chỉnh sửa HTML/JS phức tạp  
-✅ **Dễ backup**: Chỉ cần backup file YAML  
+## License
 
-## Workflow thông thường
+This project is open source and available under the [MIT License](LICENSE).
 
-1. Chỉnh sửa `data.yaml`
-2. Chạy `python generate.py`
-3. Mở `index.html` để xem kết quả
-4. Repeat khi cần cập nhật thông tin
+## Contact
 
-Bây giờ bạn có thể dễ dàng cập nhật portfolio chỉ bằng cách chỉnh sửa file YAML! 🚀
+- **Email**: HIEULP@1DEVOPS.IO
+- **Phone**: (084) 975-669-775
+- **LinkedIn**: [linkedin.com/in/googlesky](https://linkedin.com/in/googlesky)
+- **GitHub**: [github.com/googlesky](https://github.com/googlesky)
+
+---
+
+**Built with ❤️ using Jekyll and GitHub Pages**

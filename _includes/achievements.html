@@ -1,0 +1,22 @@
+<!-- Achievements Section -->
+<section id="achievements" class="terminal-section">
+    <div class="prompt">
+        <span class="user">{{ site.data.profile.personal.username }}@{{ site.data.profile.personal.terminal_name }}</span><span class="separator">:</span><span class="path">~</span><span class="dollar">$</span>
+        <span class="command">cat /var/log/achievements.log</span>
+    </div>
+    <div class="command-output">
+        <div class="achievements-timeline">
+            <h2 class="section-title"># Professional Achievements & Certifications</h2>
+            
+            {% for achievement in site.data.profile.achievements %}
+            <div class="log-entry">
+                <div class="log-timestamp">[{{ achievement.date }}]</div>
+                <div class="log-content">
+                    <h3 class="company">🏆 {{ achievement.title }}</h3>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>

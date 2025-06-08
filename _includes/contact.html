@@ -1,0 +1,26 @@
+<!-- Contact Section -->
+<section id="contact" class="terminal-section">
+    <div class="prompt">
+        <span class="user">{{ site.data.profile.personal.username }}@{{ site.data.profile.personal.terminal_name }}</span><span class="separator">:</span><span class="path">~</span><span class="dollar">$</span>
+        <span class="command">echo "Ready for opportunities!"</span>
+    </div>
+    <div class="command-output">
+        <div class="contact-info">
+            <h2 class="section-title"># Let's Connect</h2>
+            <p class="cta-text">{{ site.data.profile.cta_text }}</p>
+            <p class="cta-text">{{ site.data.profile.cta_description }}</p>
+            
+            <div class="contact-methods">
+                <a href="mailto:{{ site.data.profile.personal.email }}" class="contact-button">
+                    📧 Send Email
+                </a>
+                <a href="tel:{{ site.data.profile.personal.phone | replace: ' ', '' | replace: '(', '' | replace: ')', '' | replace: '-', '' }}" class="contact-button">
+                    📞 Call Me
+                </a>
+                <a href="{{ site.data.profile.personal.resume_file }}" target="_blank" class="contact-button">
+                    📄 Download Resume
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
