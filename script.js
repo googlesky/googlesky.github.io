@@ -90,7 +90,7 @@ class TerminalEmulator {
         commandLine.className = 'terminal-command-line';
         commandLine.innerHTML = `
             <span class="prompt-output">
-                <span class="user">visitor@hieulephuong-terminal</span><span class="separator">:</span><span class="path">~</span><span class="dollar">$</span>
+                <span class="user">visitor@hieule-terminal</span><span class="separator">:</span><span class="path">~</span><span class="dollar">$</span>
             </span>
             <span class="command-text">${command}</span>
         `;
@@ -153,7 +153,7 @@ class TerminalEmulator {
     showWelcomeMessage() {
         this.displayOutput(`
             <div class="welcome-msg">
-                <p style="color: #00ffff;">Welcome to Lê Phương Hiếu's Interactive Terminal!</p>
+                <p style="color: #00ffff;">Welcome to Lê Hiếu's Interactive Terminal!</p>
                 <p>Type <span style="color: #ffff00;">'help'</span> to see available commands.</p>
                 <p style="color: #888; font-style: italic;">Tip: Use Tab for autocompletion, ↑↓ arrows for command history.</p>
             </div>
@@ -191,8 +191,8 @@ class TerminalEmulator {
     showAbout() {
         this.displayOutput(`
             <div class="about-content">
-                <h3 style="color: #00ffff; margin-bottom: 15px;">About Lê Phương Hiếu</h3>
-                <p><span style="color: #00ff00;">Name:</span> Lê Phương Hiếu</p>
+                <h3 style="color: #00ffff; margin-bottom: 15px;">About Lê Hiếu</h3>
+                <p><span style="color: #00ff00;">Name:</span> Lê Hiếu</p>
                 <p><span style="color: #00ff00;">Title:</span> Senior DevOps/SRE</p>
                 <p><span style="color: #00ff00;">Email:</span> HIEULP@1DEVOPS.IO</p>
                 <p><span style="color: #00ff00;">Phone:</span> (084) 975-669-775</p>
@@ -246,7 +246,7 @@ class TerminalEmulator {
                     <h4 style="color: #ffff00;">Security:</h4>
                     <p style="color: #cccccc;">DockerSec, Prowler, Trivy, Falco, CrowdSec</p>
                 </div>
-                <div>
+                <div style="margin-bottom: 15px;">
                     <h4 style="color: #ffff00;">Registry & Proxy:</h4>
                     <p style="color: #cccccc;">Nexus, JFrog, Maven, Docker registry, HaProxy, Nginx, Cloudflare</p>
                 </div>
@@ -259,7 +259,7 @@ class TerminalEmulator {
             <div class="experience-content">
                 <h3 style="color: #00ffff; margin-bottom: 15px;">Professional Experience</h3>
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">CONFIDENTIAL (HCMC/Thailand) — Senior DevOps (Dec 2022–Present)</h4>
+                    <h4 style="color: #ffff00;">Personal Projects (HCMC/Thailand) — Senior DevOps (Dec 2022–Present)</h4>
                     <p style="color: #cccccc;">Setup/maintain CI/CD for AI models/apps (Jenkins, GitLab-CI). Managed Azure DevOps services (AKS, Storage, VMs, PostgreSQL, MySQL). Migrated AWS to Azure, optimized resources. Led DevOps team, built scalable deployments (Helm, ArgoCD). Enhanced security (DockerSec), managed MongoDB Atlas. Integrated Llama, GPT-4, LLMs. Trained models (YoloV8, lgbm, lstm) for fraud detection, food supply forecasting.</p>
                 </div>
                 <div style="margin-bottom: 15px;">
@@ -301,8 +301,7 @@ class TerminalEmulator {
                 <div style="margin-bottom: 15px;">
                     <h4 style="color: #ffff00;">🗄️ Database Performance Optimization</h4>
                     <p style="color: #cccccc;">Optimized TiDB and MySQL clusters for high-traffic applications. Implemented automated backup strategies and disaster recovery procedures.</p>
-                </div>
-                <div>
+                </div>                <div>
                     <h4 style="color: #ffff00;">🔧 GitOps Workflow Implementation</h4>
                     <p style="color: #cccccc;">Established GitOps practices for application deployment and configuration management. Improved deployment reliability and rollback capabilities.</p>
                 </div>
@@ -363,18 +362,18 @@ class TerminalEmulator {
     hireMe() {
         this.displayOutput(`
             <div class="hire-content">
-                <h3 style="color: #00ffff; margin-bottom: 15px;">Why Hire Lê Phương Hiếu?</h3>
+                <h3 style="color: #00ffff; margin-bottom: 15px;">Why Hire Lê Hiếu?</h3>
                 <ul style="color: #cccccc; margin-left: 20px;">
-                    <li>🚀 <strong>8+ years</strong> of hands-on DevOps and SRE experience</li>
-                    <li>☁️ <strong>Multi-cloud expertise</strong> (AWS, Azure, IBM, Oracle Cloud)</li>
-                    <li>🔒 <strong>Security-first mindset</strong> with modern security tools</li>
-                    <li>📈 <strong>Proven track record</strong> of improving system reliability (99.95% SLA)</li>
-                    <li>🛠️ <strong>Full-stack automation</strong> from infrastructure to AI/ML deployment</li>
-                    <li>📊 <strong>Monitoring & observability</strong> expertise</li>
-                    <li>🤖 <strong>AI/ML Platform experience</strong> with modern frameworks</li>
-                    <li>💰 <strong>Cost optimization specialist</strong> (30% AWS cost reduction)</li>
-                    <li>🎯 <strong>Problem solver</strong> with strong analytical skills</li>
-                    <li>🤝 <strong>Collaborative team leader</strong> with mentorship experience</li>
+                    <li>🚀 8+ years of hands-on DevOps and SRE experience</li>
+                    <li>☁️ Multi-cloud expertise (AWS, Azure, IBM, Oracle Cloud)</li>
+                    <li>🔒 Security-first mindset with modern security tools</li>
+                    <li>📈 Proven track record of improving system reliability (99.95% SLA)</li>
+                    <li>🛠️ Full-stack automation from infrastructure to AI/ML deployment</li>
+                    <li>📊 Monitoring & observability expertise</li>
+                    <li>🤖 AI/ML Platform experience with modern frameworks</li>
+                    <li>💰 Cost optimization specialist (30% AWS cost reduction)</li>
+                    <li>🎯 Problem solver with strong analytical skills</li>
+                    <li>🤝 Collaborative team leader with mentorship experience</li>
                 </ul>
                 <br>
                 <p style="color: #00ff00;">Ready to bring reliability, security, and efficiency to your infrastructure!</p>
@@ -393,19 +392,19 @@ class TerminalEmulator {
     }
 
     printWorkingDirectory() {
-        this.displayOutput('<span style="color: #00ffff;">/home/hieulephuong/portfolio</span>');
+        this.displayOutput('<span style="color: #00ffff;">/home/hieule/portfolio</span>');
     }
 
     listDirectory() {
         this.displayOutput(`
             <div style="color: #cccccc;">
-                <div style="color: #00ffff;">drwxr-xr-x 2 hieulephuong hieulephuong 4096 Dec  7 16:10 <span style="color: #ffff00;">about/</span></div>
-                <div style="color: #00ffff;">drwxr-xr-x 2 hieulephuong hieulephuong 4096 Dec  7 16:10 <span style="color: #ffff00;">skills/</span></div>
-                <div style="color: #00ffff;">drwxr-xr-x 2 hieulephuong hieulephuong 4096 Dec  7 16:10 <span style="color: #ffff00;">experience/</span></div>
-                <div style="color: #00ffff;">drwxr-xr-x 2 hieulephuong hieulephuong 4096 Dec  7 16:10 <span style="color: #ffff00;">projects/</span></div>
-                <div style="color: #00ffff;">-rw-r--r-- 1 hieulephuong hieulephuong 2048 Dec  7 16:10 <span style="color: #ffffff;">README.md</span></div>
-                <div style="color: #00ffff;">-rw-r--r-- 1 hieulephuong hieulephuong 1024 Dec  7 16:10 <span style="color: #ffffff;">contact.txt</span></div>
-                <div style="color: #00ffff;">-rw-r--r-- 1 hieulephuong hieulephuong 4096 Dec  7 16:10 <span style="color: #ff0000;">LePhuongHieu_DevOps_Resume_v3.pdf</span></div>
+                <div style="color: #00ffff;">drwxr-xr-x 2 hieule hieule 4096 Dec  7 16:10 <span style="color: #ffff00;">about/</span></div>
+                <div style="color: #00ffff;">drwxr-xr-x 2 hieule hieule 4096 Dec  7 16:10 <span style="color: #ffff00;">skills/</span></div>
+                <div style="color: #00ffff;">drwxr-xr-x 2 hieule hieule 4096 Dec  7 16:10 <span style="color: #ffff00;">experience/</span></div>
+                <div style="color: #00ffff;">drwxr-xr-x 2 hieule hieule 4096 Dec  7 16:10 <span style="color: #ffff00;">projects/</span></div>
+                <div style="color: #00ffff;">-rw-r--r-- 1 hieule hieule 2048 Dec  7 16:10 <span style="color: #ffffff;">README.md</span></div>
+                <div style="color: #00ffff;">-rw-r--r-- 1 hieule hieule 1024 Dec  7 16:10 <span style="color: #ffffff;">contact.txt</span></div>
+                <div style="color: #00ffff;">-rw-r--r-- 1 hieule hieule 4096 Dec  7 16:10 <span style="color: #ff0000;">LePhuongHieu_DevOps_Resume_v3.pdf</span></div>
             </div>
         `);
     }
@@ -418,9 +417,9 @@ class TerminalEmulator {
 
         const filename = args[0].toLowerCase();
         const files = {
-            'readme.md': 'Welcome to Lê Phương Hiếu\'s Professional Portfolio\n\nA passionate DevOps and SRE professional with expertise in cloud infrastructure, automation, AI/ML platforms, and security.',
+            'readme.md': 'Welcome to Lê Hiếu\'s Professional Portfolio\n\nA passionate DevOps and SRE professional with expertise in cloud infrastructure, automation, AI/ML platforms, and security.',
             'contact.txt': 'Email: HIEULP@1DEVOPS.IO\nPhone: (084) 975-669-775\nLocation: Thu Duc, Ho Chi Minh City, Vietnam\nLinkedIn: linkedin.com/in/googlesky\nGitHub: github.com/googlesky',
-            'about.txt': 'Lê Phương Hiếu - Senior DevOps/SRE\n8+ years of experience in DevOps, SRE, and System Administration'
+            'about.txt': 'Lê Hiếu - Senior DevOps/SRE\n8+ years of experience in DevOps, SRE, and System Administration'
         };
 
         if (files[filename]) {
@@ -462,7 +461,7 @@ class TerminalEmulator {
      \`-'\`   \`-'\`   \`-'\`   \`-'\`   \`-'\`
                 </pre>
                 <div style="color: #cccccc;">
-                    <p><span style="color: #00ff00;">User:</span> Lê Phương Hiếu</p>
+                    <p><span style="color: #00ff00;">User:</span> Lê Hiếu</p>
                     <p><span style="color: #00ff00;">Title:</span> Senior DevOps/SRE</p>
                     <p><span style="color: #00ff00;">OS:</span> Linux Terminal Environment</p>
                     <p><span style="color: #00ff00;">Shell:</span> Interactive Portfolio Terminal</p>
@@ -488,7 +487,7 @@ class TerminalEmulator {
                 <div style="color: #ff0000;">
                     <p>[sudo] password for visitor: ••••••••</p>
                     <p style="color: #00ff00;">Access granted! Executing privileged hire command...</p>
-                    <p style="color: #ffff00;">🚨 ALERT: Exceptional DevSecOps engineer detected!</p>
+                    <p style="color: #ffff00;">🚨 ALERT: Exceptional DevOps engineer detected!</p>
                     <p style="color: #00ffff;">Contact HIEULP@1DEVOPS.IO immediately for interview.</p>
                 </div>
             `);
@@ -613,13 +612,6 @@ function playTypingSound() {
     oscillator.start(audioContext.currentTime);
     oscillator.stop(audioContext.currentTime + 0.1);
 }
-
-// Add typing sound to input (optional - uncomment if desired)
-// document.addEventListener('keydown', (e) => {
-//     if (e.target.matches('.terminal-input')) {
-//         playTypingSound();
-//     }
-// });
 
 // Performance optimization: Lazy load animations
 const observerOptions = {
