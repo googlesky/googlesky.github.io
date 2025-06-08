@@ -1,7 +1,7 @@
 title: "Lê Hiếu - Senior DevOps/SRE"
 description: "Professional portfolio with Linux Terminal interface"
 baseurl: ""
-url: "https://yourusername.github.io"
+url: "https://googlesky.github.io/landing-page"
 
 # Build settings
 markdown: kramdown
@@ -36,7 +36,7 @@ defaults:
 
 # Site settings
 author: "Lê Hiếu"
-email: "HIEULP@1DEVOPS.IO"
+email: "hieulp@1devop.io"
 phone: "(084) 975-669-775"
 location: "Thu Duc, Ho Chi Minh City, Vietnam"
 

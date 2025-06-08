@@ -38,12 +38,25 @@ A professional portfolio website built with Jekyll, featuring a Linux Terminal i
 3. **View the Site**
    Open `http://localhost:4000` in your browser
 
-### GitHub Pages Deployment
+### Automated GitHub Actions Deployment
+
+This repository includes a GitHub Actions workflow that automatically deploys the Jekyll site to GitHub Pages on every push to the main branch.
+
+#### Setup Instructions:
 
 1. **Fork/Clone this repository**
-2. **Enable GitHub Pages** in repository settings
-3. **Configure the source** to deploy from the main branch
-4. **Update `_config.yml`** with your GitHub Pages URL
+2. **Enable GitHub Pages** in repository settings:
+   - Go to Settings → Pages
+   - Source: **GitHub Actions** (recommended)
+3. **Update `_config.yml`** with your GitHub Pages URL
+4. **Push to main branch** - deployment happens automatically!
+
+#### Manual Deployment (Alternative):
+
+If you prefer manual deployment:
+1. Go to Settings → Pages
+2. Source: Deploy from a branch
+3. Branch: main / (root)
 
 ## Configuration
 
@@ -120,20 +133,40 @@ The interactive terminal supports these commands:
 - `cat [file]` - Display file contents
 - `echo [text]` - Display text
 
-## GitHub Pages Setup
+## GitHub Actions Deployment
+
+This repository uses GitHub Actions for automated deployment to GitHub Pages. The workflow is triggered automatically on every push to the main branch.
+
+### Workflow Features:
+- **Automatic Trigger**: Deploys on push to main/master branch
+- **Ruby 3.1 Setup**: Uses Ruby 3.1 with bundler cache for faster builds
+- **Jekyll Build**: Builds the site with production environment
+- **Pages Deploy**: Uses official GitHub Pages actions for deployment
+- **Proper Permissions**: Configured with necessary permissions for Pages deployment
+
+### Manual Setup:
 
 1. **Repository Settings**:
    - Go to Settings → Pages
-   - Source: Deploy from a branch
-   - Branch: main / (root)
+   - Source: **GitHub Actions** (recommended for this setup)
+   - The workflow will handle the rest automatically
 
 2. **Custom Domain** (optional):
    - Add CNAME file with your domain
    - Configure DNS settings
+   - Update `_config.yml` with your custom domain URL
 
 3. **SSL/HTTPS**:
    - Automatically enabled for github.io domains
    - Configure SSL for custom domains
+
+### Workflow File:
+The deployment workflow is located at `.github/workflows/deploy.yml` and includes:
+- Checkout code
+- Setup Ruby environment with bundler cache
+- Configure GitHub Pages
+- Build Jekyll site with production settings
+- Deploy to GitHub Pages automatically
 
 ## Performance Optimizations
 

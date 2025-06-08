@@ -41,6 +41,17 @@ Open your browser to:
 
 ## GitHub Pages Deployment
 
+> **✨ This repository now includes automated GitHub Actions deployment!**
+>
+> The automated workflow provides several benefits:
+> - 🚀 **Automatic deployment** on every push to main branch
+> - ⚡ **Faster builds** with Ruby 3.1 and bundler cache
+> - 🔒 **Consistent environment** with proper production settings
+> - 🛠️ **No manual commands** needed - just push your code
+> - 📦 **Proper artifact handling** with official GitHub Pages actions
+
+Choose your preferred deployment method below:
+
 ### Method 1: Direct Repository Deployment
 
 1. **Create/Update Repository**
@@ -69,31 +80,80 @@ Open your browser to:
    - Your site will be available at: `https://yourusername.github.io`
    - GitHub will show the URL in the Pages settings
 
-### Method 2: GitHub Actions Deployment (Advanced)
+### Method 2: GitHub Actions Deployment (Recommended)
 
-Create `.github/workflows/jekyll.yml`:
+This repository includes a pre-configured GitHub Actions workflow for automated deployment. The workflow file is located at `.github/workflows/deploy.yml`.
 
+**Automatic Setup:**
+- The workflow is already configured and ready to use
+- Triggers automatically on push to main/master branch
+- No additional setup required - just enable GitHub Actions deployment
+
+**Workflow Features:**
+- Uses Ruby 3.1 with bundler cache for faster builds
+- Builds Jekyll site with production environment settings
+- Deploys using official GitHub Pages actions
+- Includes proper permissions and concurrency settings
+
+**To Enable:**
+1. Go to repository **Settings** → **Pages**
+2. Under **Source**, select **"GitHub Actions"**
+3. Push to main branch - deployment will happen automatically!
+
+**Workflow Configuration:**
 ```yaml
-name: Build and deploy Jekyll site to GitHub Pages
+name: Deploy Jekyll to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, master ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  github-pages:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/configure-pages@v2
-      - uses: actions/jekyll-build-pages@v1
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          source: ./
-          destination: ./_site
-      - uses: actions/upload-pages-artifact@v1
-      - uses: actions/deploy-pages@v1
+          ruby-version: '3.1'
+          bundler-cache: true
+      
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
+      
+      - name: Build with Jekyll
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 ```
 
 ## Custom Domain Setup (Optional)
