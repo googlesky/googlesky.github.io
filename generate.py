@@ -80,16 +80,17 @@ def generate_experience_html(experience):
 
 def generate_achievements_html(achievements):
     """Generate achievements section HTML"""
-    achievements_text = ' • '.join([f'<strong>{achievement}</strong>' for achievement in achievements])
-    return f'''
+    achievements_html = ""
+    for achievement in achievements:
+        achievements_html += f'''
                         <div class="log-entry">
-                            <div class="log-timestamp">[Achievements & Certifications]</div>
+                            <div class="log-timestamp">[{achievement['date']}]</div>
                             <div class="log-content">
-                                <h3 class="company">Professional Achievements</h3>
-                                <p>{achievements_text}</p>
+                                <h3 class="company">🏆 {achievement['title']}</h3>
                             </div>
                         </div>
 '''
+    return achievements_html
 
 def generate_social_links_html(social):
     """Generate social links HTML"""
@@ -219,7 +220,21 @@ def generate_html(data):
                 <div class="command-output">
                     <div class="experience-timeline">
                         <h2 class="section-title"># Professional Experience</h2>
-                        {experience_html}{achievements_html}
+                        {experience_html}
+                    </div>
+                </div>
+            </section>
+
+            <!-- Achievements Section -->
+            <section id="achievements" class="terminal-section">
+                <div class="prompt">
+                    <span class="user">{personal['username']}@{personal['terminal_name']}</span><span class="separator">:</span><span class="path">~</span><span class="dollar">$</span>
+                    <span class="command">cat /var/log/achievements.log</span>
+                </div>
+                <div class="command-output">
+                    <div class="achievements-timeline">
+                        <h2 class="section-title"># Professional Achievements & Certifications</h2>
+                        {achievements_html}
                     </div>
                 </div>
             </section>
@@ -309,7 +324,7 @@ def generate_skills_js(skills):
     
     return '\n'.join(skills_content)
 
-def generate_experience_js(experience, achievements):
+def generate_experience_js(experience):
     """Generate experience content for JavaScript"""
     experience_content = []
     for exp in experience:
@@ -318,14 +333,62 @@ def generate_experience_js(experience, achievements):
                     <p style="color: #cccccc;">{exp['description']}</p>
                 </div>''')
     
-    # Add achievements
-    achievements_text = ' • '.join([f'<strong>{achievement}</strong>' for achievement in achievements])
-    experience_content.append(f'''                <div>
-                    <h4 style="color: #ffff00;">Achievements & Certifications</h4>
-                    <p style="color: #cccccc;">{achievements_text}</p>
+    return '\n'.join(experience_content)
+
+def generate_achievements_js(achievements):
+    """Generate achievements content for JavaScript"""
+    achievements_content = []
+    for achievement in achievements:
+        # Format date consistently to YYYY-MM format
+        date_part = achievement['date']
+        
+        # Convert date format from various formats to YYYY-MM
+        if 'Issued' in date_part:
+            # Handle "Issued 05-2013" format
+            date_part = date_part.replace('Issued ', '').strip()
+            if '-' in date_part:
+                month, year = date_part.split('-')
+                formatted_date = f"{year}-{month.zfill(2)}"
+            else:
+                formatted_date = date_part
+        elif '-' in date_part and len(date_part.split('-')) == 3:
+            # Handle "08-12-2017" format
+            day, month, year = date_part.split('-')
+            formatted_date = f"{year}-{month.zfill(2)}"
+        elif '-' in date_part and len(date_part.split('-')) == 2:
+            # Handle "10-2023" format
+            month, year = date_part.split('-')
+            formatted_date = f"{year}-{month.zfill(2)}"
+        else:
+            # Keep as is for other formats
+            formatted_date = date_part
+        
+        # Add emoji based on achievement type
+        title = achievement['title']
+        if 'CCNA' in title or 'Certified' in title:
+            emoji = '🎓'
+        elif 'Promoted' in title:
+            emoji = '🚀'
+        elif 'Framework' in title or 'Developed' in title:
+            emoji = '🔧'
+        elif 'Cost Reduction' in title or 'Saved' in title:
+            emoji = '💰'
+        elif 'SLA' in title:
+            emoji = '📊'
+        elif 'Migrated' in title:
+            emoji = '🌟'
+        elif 'Open Source' in title:
+            emoji = '🏅'
+        else:
+            emoji = '⚡'
+            
+        achievements_content.append(f'''                <div class="achievement-item">
+                    <span class="achievement-date">{formatted_date}</span> {emoji} <span class="achievement-title">{title}</span>
                 </div>''')
     
-    return '\n'.join(experience_content)
+    # Sort achievements by date (newest first)
+    achievements_content.reverse()
+    return '\n'.join(achievements_content)
 
 def generate_projects_js(projects):
     """Generate projects content for JavaScript"""
@@ -360,12 +423,14 @@ def generate_javascript(data):
     personal = data['personal']
     skills = data['skills']
     experience = data['experience']
+    achievements = data['achievements']
     projects = data['projects']
     available_for = data['available_for']
     hire_reasons = data['hire_reasons']
     
     skills_js = generate_skills_js(skills)
-    experience_js = generate_experience_js(experience, data['achievements'])
+    experience_js = generate_experience_js(experience)
+    achievements_js = generate_achievements_js(achievements)
     projects_js = generate_projects_js(projects)
     available_for_js = generate_available_for_js(available_for)
     hire_reasons_js = generate_hire_reasons_js(hire_reasons)
@@ -382,6 +447,7 @@ class TerminalEmulator {{
             about: () => this.showAbout(),
             skills: () => this.showSkills(),
             experience: () => this.showExperience(),
+            achievements: () => this.showAchievements(),
             contact: () => this.showContact(),
             projects: () => this.showProjects(),
             clear: () => this.clearTerminal(),
@@ -541,6 +607,7 @@ class TerminalEmulator {{
                     <span style="color: #00ff00;">about</span><span>Display profile information</span>
                     <span style="color: #00ff00;">skills</span><span>Show technical skills</span>
                     <span style="color: #00ff00;">experience</span><span>Display work experience</span>
+                    <span style="color: #00ff00;">achievements</span><span>Show achievements & certifications</span>
                     <span style="color: #00ff00;">projects</span><span>Show project portfolio</span>
                     <span style="color: #00ff00;">contact</span><span>Get contact information</span>
                     <span style="color: #00ff00;">social</span><span>Show social media links</span>
@@ -592,6 +659,15 @@ class TerminalEmulator {{
             <div class="experience-content">
                 <h3 style="color: #00ffff; margin-bottom: 15px;">Professional Experience</h3>
 {experience_js}
+            </div>
+        `);
+    }}
+
+    showAchievements() {{
+        this.displayOutput(`
+            <div class="achievements-content">
+                <h3 style="color: #00ffff; margin-bottom: 15px;">🏆 Professional Achievements & Certifications</h3>
+{achievements_js}
             </div>
         `);
     }}
@@ -680,6 +756,7 @@ class TerminalEmulator {{
                 <div style="color: #00ffff;">drwxr-xr-x 2 {personal['username']} {personal['username']} 4096 Dec  7 16:10 <span style="color: #ffff00;">about/</span></div>
                 <div style="color: #00ffff;">drwxr-xr-x 2 {personal['username']} {personal['username']} 4096 Dec  7 16:10 <span style="color: #ffff00;">skills/</span></div>
                 <div style="color: #00ffff;">drwxr-xr-x 2 {personal['username']} {personal['username']} 4096 Dec  7 16:10 <span style="color: #ffff00;">experience/</span></div>
+                <div style="color: #00ffff;">drwxr-xr-x 2 {personal['username']} {personal['username']} 4096 Dec  7 16:10 <span style="color: #ffff00;">achievements/</span></div>
                 <div style="color: #00ffff;">drwxr-xr-x 2 {personal['username']} {personal['username']} 4096 Dec  7 16:10 <span style="color: #ffff00;">projects/</span></div>
                 <div style="color: #00ffff;">-rw-r--r-- 1 {personal['username']} {personal['username']} 2048 Dec  7 16:10 <span style="color: #ffffff;">README.md</span></div>
                 <div style="color: #00ffff;">-rw-r--r-- 1 {personal['username']} {personal['username']} 1024 Dec  7 16:10 <span style="color: #ffffff;">contact.txt</span></div>

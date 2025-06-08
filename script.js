@@ -10,6 +10,7 @@ class TerminalEmulator {
             about: () => this.showAbout(),
             skills: () => this.showSkills(),
             experience: () => this.showExperience(),
+            achievements: () => this.showAchievements(),
             contact: () => this.showContact(),
             projects: () => this.showProjects(),
             clear: () => this.clearTerminal(),
@@ -169,6 +170,7 @@ class TerminalEmulator {
                     <span style="color: #00ff00;">about</span><span>Display profile information</span>
                     <span style="color: #00ff00;">skills</span><span>Show technical skills</span>
                     <span style="color: #00ff00;">experience</span><span>Display work experience</span>
+                    <span style="color: #00ff00;">achievements</span><span>Show achievements & certifications</span>
                     <span style="color: #00ff00;">projects</span><span>Show project portfolio</span>
                     <span style="color: #00ff00;">contact</span><span>Get contact information</span>
                     <span style="color: #00ff00;">social</span><span>Show social media links</span>
@@ -274,9 +276,40 @@ class TerminalEmulator {
                     <h4 style="color: #ffff00;">VNG-ZaloPay — Senior DevOps/SRE/SO (Jun 2020–Jul 2021)</h4>
                     <p style="color: #cccccc;">Managed K8s, TiDB, MySQL, CI/CD (Jenkins), Ansible, Python, Golang. Managed caching/message brokers (Memcache, Redis, Kafka).</p>
                 </div>
-                <div>
-                    <h4 style="color: #ffff00;">Achievements & Certifications</h4>
-                    <p style="color: #cccccc;"><strong>CCNA (05-2013)</strong> • <strong>ACMICPC 2nd Open Source (08-12-2017)</strong> • <strong>Promoted to DevOps (12-2018)</strong> • <strong>Developed KBTG CI/CD Framework (09-2019)</strong> • <strong>Developed ZaloPay CI/CD Framework - Saved ~90% TTM (01-2020)</strong> • <strong>Promoted to Senior DevOps (04-2021)</strong> • <strong>SLA Keeper 99.95% HomeCredit Salers App (04-2022)</strong> • <strong>30% AWS Cost Reduction ParcelPerform (11-2022)</strong> • <strong>Migrated AWS to Azure in 3M (10-2023)</strong></p>
+            </div>
+        `);
+    }
+
+    showAchievements() {
+        this.displayOutput(`
+            <div class="achievements-content">
+                <h3 style="color: #00ffff; margin-bottom: 15px;">🏆 Professional Achievements & Certifications</h3>
+                <div class="achievement-item">
+                    <span class="achievement-date">2023-10</span> 🌟 <span class="achievement-title">Migrated AWS to Azure in 3M</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="achievement-date">2022-11</span> 💰 <span class="achievement-title">30% AWS Cost Reduction (ParcelPerform)</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="achievement-date">2022-04</span> 📊 <span class="achievement-title">SLA Keeper 99.95% (HomeCredit Salers App)</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="achievement-date">2021-04</span> 🚀 <span class="achievement-title">Promoted to Senior DevOps</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="achievement-date">2020-01</span> 🔧 <span class="achievement-title">Developed ZaloPay CI/CD Framework (Saved ~90% TTM)</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="achievement-date">2019-09</span> 🔧 <span class="achievement-title">Developed KBTG CI/CD Framework</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="achievement-date">2018-12</span> 🚀 <span class="achievement-title">Promoted to DevOps</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="achievement-date">2017-12</span> 🏅 <span class="achievement-title">ACMICPC 2nd Open Source</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="achievement-date">2013-05</span> 🎓 <span class="achievement-title">CCNA (Cisco Certified Network Associate)</span>
                 </div>
             </div>
         `);
@@ -401,6 +434,7 @@ class TerminalEmulator {
                 <div style="color: #00ffff;">drwxr-xr-x 2 hieule hieule 4096 Dec  7 16:10 <span style="color: #ffff00;">about/</span></div>
                 <div style="color: #00ffff;">drwxr-xr-x 2 hieule hieule 4096 Dec  7 16:10 <span style="color: #ffff00;">skills/</span></div>
                 <div style="color: #00ffff;">drwxr-xr-x 2 hieule hieule 4096 Dec  7 16:10 <span style="color: #ffff00;">experience/</span></div>
+                <div style="color: #00ffff;">drwxr-xr-x 2 hieule hieule 4096 Dec  7 16:10 <span style="color: #ffff00;">achievements/</span></div>
                 <div style="color: #00ffff;">drwxr-xr-x 2 hieule hieule 4096 Dec  7 16:10 <span style="color: #ffff00;">projects/</span></div>
                 <div style="color: #00ffff;">-rw-r--r-- 1 hieule hieule 2048 Dec  7 16:10 <span style="color: #ffffff;">README.md</span></div>
                 <div style="color: #00ffff;">-rw-r--r-- 1 hieule hieule 1024 Dec  7 16:10 <span style="color: #ffffff;">contact.txt</span></div>
