@@ -5,7 +5,7 @@ personal:
   location: "Thu Duc, Ho Chi Minh City, Vietnam"
   email: "HIEULP@1DEVOPS.IO"
   phone: "(084) 975-669-775"
-  resume_file: "LePhuongHieu_DevOps_Resume_v3.pdf"
+  resume_file: "LePhuongHieu - Resume.pdf"
   username: "hieule"
   terminal_name: "devops"
 
@@ -104,6 +104,41 @@ experience:
     position: "Senior DevOps/SRE/SO"
     period: "Jun 2020–Jul 2021"
     description: "Managed K8s, TiDB, MySQL, CI/CD (Jenkins), Ansible, Python, Golang. Managed caching/message brokers (Memcache, Redis, Kafka)."
+
+  - company: "TMA-Humana"
+    position: "DevOps"
+    period: "Dec 2019–Jun 2020"
+    description: "Implemented DevOps practices and CI/CD pipelines for healthcare technology solutions. Managed infrastructure automation and deployment processes."
+
+  - company: "TMA-KBTG"
+    position: "DevOps"
+    period: "Mar 2019–Dec 2019"
+    description: "Developed and maintained CI/CD frameworks for banking and financial technology systems. Implemented automated deployment processes and infrastructure management."
+
+  - company: "TMA-Velocix"
+    position: "DevOps"
+    period: "Jul 2018–Mar 2019"
+    description: "Managed DevOps operations for content delivery network solutions. Implemented automation tools and deployment pipelines for scalable infrastructure."
+
+  - company: "TMA-HoanVuLab"
+    position: "DevOps"
+    period: "May 2018–Jul 2018"
+    description: "Implemented DevOps practices for laboratory management systems. Focused on automation, deployment, and infrastructure optimization."
+
+  - company: "HDVnBits.Org"
+    position: "Sysadmin & PHP Developer"
+    period: "May 2012–Jul 2017"
+    description: "Managed system administration and developed PHP applications for community platform. Maintained servers, databases, and web applications for educational and community services."
+
+  - company: "Can Tho University"
+    position: "Helpdesk"
+    period: "Sep 2009–Jul 2013"
+    description: "Provided technical support and helpdesk services for university IT infrastructure. Assisted students and staff with hardware, software, and network issues."
+
+  - company: "CaraCafe"
+    position: "IT Support"
+    period: "Sep 2011–May 2013"
+    description: "Provided IT support services for cafe operations. Managed point-of-sale systems, network infrastructure, and general technical support."
 
 achievements:
   - title: "CCNA (Cisco Certified Network Associate)"
