@@ -28,12 +28,15 @@ class TerminalEmulator {
             social: () => this.showSocial(),
             resume: () => this.downloadResume(),
             hire: () => this.hireMe(),
-            sudo: (args) => this.sudo(args)
+            sudo: (args) => this.sudo(args),
+            analytics: () => this.showAnalytics()
         };
 
         this.commandHistory = [];
         this.historyIndex = -1;
         this.startTime = new Date();
+        this.sessionId = this.generateSessionId();
+        this.commandCount = 0;
 
         this.init();
     }
@@ -51,6 +54,12 @@ class TerminalEmulator {
         this.updateTime();
         this.showWelcomeMessage();
         setInterval(() => this.updateTime(), 1000);
+        
+        // Track initial session
+        this.trackEvent('User_Session', 'Session_Started', 'terminal_loaded');
+        
+        // Track user behavior every 30 seconds
+        setInterval(() => this.trackUserBehavior(), 30000);
     }
 
     setupEventListeners() {
@@ -70,12 +79,33 @@ class TerminalEmulator {
         });
 
         // Focus input when clicking anywhere in terminal
-        document.addEventListener('click', () => {
+        document.addEventListener('click', (e) => {
+            // Track external link clicks
+            if (e.target.tagName === 'A' && e.target.href) {
+                const linkType = this.getLinkType(e.target.href);
+                this.trackEvent('External_Links', 'Link_Clicked', linkType);
+                
+                // Track specific high-value actions
+                if (e.target.href.includes('mailto:')) {
+                    this.trackEvent('Lead_Generation', 'Email_Clicked', 'contact_attempt');
+                } else if (e.target.href.includes('tel:')) {
+                    this.trackEvent('Lead_Generation', 'Phone_Clicked', 'contact_attempt');
+                } else if (e.target.href.includes('.pdf')) {
+                    this.trackEvent('Lead_Generation', 'Resume_PDF_Clicked', 'document_download');
+                }
+            }
+            
             this.terminalInput.focus();
         });
 
         // Initial focus
         this.terminalInput.focus();
+
+        // Track page exit
+        window.addEventListener('beforeunload', () => {
+            const finalSessionTime = Math.floor((new Date() - this.startTime) / 1000);
+            this.trackEvent('User_Session', 'Session_Ended', 'page_exit', finalSessionTime);
+        });
     }
 
     processCommand() {
@@ -87,10 +117,15 @@ class TerminalEmulator {
 
         const [command, ...args] = input.toLowerCase().split(' ');
         
+        // Track command usage with Google Analytics
+        this.trackCommand(command, args, input);
+        
         if (this.commands[command]) {
             this.commands[command](args);
         } else {
             this.displayOutput(`Command not found: ${command}. Type 'help' for available commands.`, 'error');
+            // Track invalid commands
+            this.trackEvent('Terminal', 'Invalid_Command', command);
         }
 
         this.terminalInput.value = '';
@@ -198,6 +233,7 @@ class TerminalEmulator {
                     <span style="color: #00ff00;">neofetch</span><span>Display system information</span>
                     <span style="color: #00ff00;">cat [file]</span><span>Display file contents</span>
                     <span style="color: #00ff00;">echo [text]</span><span>Display text</span>
+                    <span style="color: #00ff00;">analytics</span><span>Show current session analytics</span>
                 </div>
             </div>
         `);
@@ -205,6 +241,7 @@ class TerminalEmulator {
 
     showAbout() {
         const profile = this.profileData?.personal || {};
+        this.trackPageInteraction('about_section');
         this.displayOutput(`
             <div class="about-content">
                 <h3 style="color: #00ffff; margin-bottom: 15px;">About ${profile.name || 'Lê Hiếu'}</h3>
@@ -223,6 +260,7 @@ class TerminalEmulator {
 
     showSkills() {
         const skills = this.profileData?.skills || {};
+        this.trackPageInteraction('skills_section');
         this.displayOutput(`
             <div class="skills-content">
                 <h3 style="color: #00ffff; margin-bottom: 15px;">Technical Skills</h3>
@@ -333,6 +371,8 @@ class TerminalEmulator {
         const profile = this.profileData?.personal || {};
         const availableFor = this.profileData?.available_for || [];
         
+        this.trackPageInteraction('contact_section');
+        this.trackEvent('Lead_Generation', 'Contact_Viewed', 'potential_lead');
         this.displayOutput(`
             <div class="contact-content">
                 <h3 style="color: #00ffff; margin-bottom: 15px;">Contact Information</h3>
@@ -366,6 +406,8 @@ class TerminalEmulator {
 
     downloadResume() {
         const profile = this.profileData?.personal || {};
+        this.trackPageInteraction('resume_download');
+        this.trackEvent('Lead_Generation', 'Resume_Downloaded', 'high_intent_action');
         this.displayOutput(`
             <div class="resume-content">
                 <p style="color: #00ffff;">📄 Opening resume download...</p>
@@ -384,6 +426,9 @@ class TerminalEmulator {
         const hireReasons = this.profileData?.hire_reasons || [];
         const profile = this.profileData?.personal || {};
         const conclusion = this.profileData?.hire_conclusion || '';
+        
+        this.trackPageInteraction('hire_section');
+        this.trackEvent('Lead_Generation', 'Hire_Page_Viewed', 'very_high_intent_action');
         
         let hireHtml = `
             <div class="hire-content">
@@ -529,6 +574,146 @@ class TerminalEmulator {
         } else {
             this.displayOutput(`sudo: ${command}: command not found`, 'error');
         }
+    }
+
+    // Analytics Tracking Methods
+    generateSessionId() {
+        return 'session_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+    }
+
+    trackEvent(category, action, label = null, value = null) {
+        // Check if gtag is available
+        if (typeof gtag !== 'undefined') {
+            const eventData = {
+                event_category: category,
+                event_label: label,
+                custom_parameter_session_id: this.sessionId
+            };
+            
+            if (value !== null) {
+                eventData.value = value;
+            }
+            
+            gtag('event', action, eventData);
+        }
+    }
+
+    trackCommand(command, args, fullInput) {
+        this.commandCount++;
+        
+        // Track the specific command
+        this.trackEvent('Terminal', 'Command_Executed', command);
+        
+        // Track command with arguments if present
+        if (args && args.length > 0) {
+            this.trackEvent('Terminal', 'Command_With_Args', `${command} ${args.join(' ')}`);
+        }
+        
+        // Track user engagement metrics
+        const sessionTime = Math.floor((new Date() - this.startTime) / 1000);
+        this.trackEvent('User_Engagement', 'Command_Count', command, this.commandCount);
+        this.trackEvent('User_Engagement', 'Session_Duration', 'seconds', sessionTime);
+        
+        // Track specific command categories for analysis
+        this.trackCommandCategory(command);
+        
+        // Track full command for detailed analysis (be careful with privacy)
+        this.trackEvent('Terminal', 'Full_Command', fullInput.substring(0, 100)); // Limit to 100 chars
+    }
+
+    trackCommandCategory(command) {
+        const categories = {
+            'info_commands': ['about', 'skills', 'experience', 'achievements', 'whoami', 'neofetch'],
+            'portfolio_commands': ['projects', 'resume', 'social', 'contact'],
+            'system_commands': ['help', 'clear', 'pwd', 'ls', 'date', 'uptime'],
+            'interactive_commands': ['cat', 'echo', 'sudo'],
+            'action_commands': ['hire', 'resume']
+        };
+
+        for (const [category, commands] of Object.entries(categories)) {
+            if (commands.includes(command)) {
+                this.trackEvent('Command_Category', category, command);
+                break;
+            }
+        }
+    }
+
+    trackUserBehavior() {
+        // Track when user starts interacting
+        const sessionTime = Math.floor((new Date() - this.startTime) / 1000);
+        
+        if (sessionTime > 30) { // Engaged user (30+ seconds)
+            this.trackEvent('User_Engagement', 'Engaged_User', 'session_30_plus_seconds');
+        }
+        
+        if (this.commandCount >= 5) { // Active user (5+ commands)
+            this.trackEvent('User_Engagement', 'Active_User', 'commands_5_plus');
+        }
+        
+        if (sessionTime > 120) { // Highly engaged (2+ minutes)
+            this.trackEvent('User_Engagement', 'Highly_Engaged', 'session_2_plus_minutes');
+        }
+    }
+
+    trackPageInteraction(section) {
+        this.trackEvent('Page_Interaction', 'Section_Viewed', section);
+    }
+
+    getLinkType(url) {
+        if (url.includes('mailto:')) return 'email';
+        if (url.includes('tel:')) return 'phone';
+        if (url.includes('linkedin.com')) return 'linkedin';
+        if (url.includes('github.com')) return 'github';
+        if (url.includes('gitlab.com')) return 'gitlab';
+        if (url.includes('bitbucket.org')) return 'bitbucket';
+        if (url.includes('stackoverflow.com')) return 'stackoverflow';
+        if (url.includes('telegram')) return 'telegram';
+        if (url.includes('.pdf')) return 'resume_pdf';
+        return 'other';
+    }
+
+    showAnalytics() {
+        const sessionTime = Math.floor((new Date() - this.startTime) / 1000);
+        const minutes = Math.floor(sessionTime / 60);
+        const seconds = sessionTime % 60;
+        
+        this.trackPageInteraction('analytics_dashboard');
+        this.displayOutput(`
+            <div class="analytics-content">
+                <h3 style="color: #00ffff; margin-bottom: 15px;">📊 Current Session Analytics</h3>
+                <div style="color: #cccccc;">
+                    <p><span style="color: #00ff00;">Session ID:</span> ${this.sessionId}</p>
+                    <p><span style="color: #00ff00;">Time on Site:</span> ${minutes}m ${seconds}s</p>
+                    <p><span style="color: #00ff00;">Commands Executed:</span> ${this.commandCount}</p>
+                    <p><span style="color: #00ff00;">Start Time:</span> ${this.startTime.toLocaleString()}</p>
+                </div>
+                
+                <h4 style="color: #ffff00; margin-top: 15px;">What We Track:</h4>
+                <ul style="color: #cccccc; margin-left: 20px;">
+                    <li>Every command you run in the terminal</li>
+                    <li>Which sections you explore (about, skills, experience, etc.)</li>
+                    <li>Time spent on the site and engagement level</li>
+                    <li>External link clicks (LinkedIn, GitHub, email, phone)</li>
+                    <li>Resume downloads and contact actions</li>
+                    <li>Command categories and usage patterns</li>
+                </ul>
+                
+                <h4 style="color: #ffff00; margin-top: 15px;">Analytics Categories:</h4>
+                <ul style="color: #cccccc; margin-left: 20px;">
+                    <li><span style="color: #00ff00;">Terminal:</span> All command executions</li>
+                    <li><span style="color: #00ff00;">User_Engagement:</span> Session duration, command frequency</li>
+                    <li><span style="color: #00ff00;">Page_Interaction:</span> Section views</li>
+                    <li><span style="color: #00ff00;">Lead_Generation:</span> High-value actions (contact, hire, resume)</li>
+                    <li><span style="color: #00ff00;">External_Links:</span> Social media and external clicks</li>
+                    <li><span style="color: #00ff00;">Command_Category:</span> Grouped command analysis</li>
+                </ul>
+                
+                <p style="color: #888; margin-top: 15px; font-style: italic;">
+                    All data is used to improve user experience and understand visitor behavior.
+                    Check Google Analytics for detailed insights!
+                </p>
+            </div>
+        `);
     }
 }
 
