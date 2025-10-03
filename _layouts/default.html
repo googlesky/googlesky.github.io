@@ -20,19 +20,34 @@
     <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <a class="skip-link" href="#welcome">Skip to main content</a>
     <div class="terminal-container">
         <!-- Terminal Window Header -->
-        <div class="terminal-header">
-            <div class="terminal-controls">
-                <span class="control close"></span>
-                <span class="control minimize"></span>
-                <span class="control maximize"></span>
+        <header class="terminal-header" role="banner">
+            <div class="terminal-left">
+                <div class="terminal-controls" aria-hidden="true">
+                    <span class="control close"></span>
+                    <span class="control minimize"></span>
+                    <span class="control maximize"></span>
+                </div>
+                <div class="terminal-brand">
+                    <span class="terminal-title">{{ site.data.profile.personal.username }}@{{ site.data.profile.personal.terminal_name }}-terminal:~$ Professional Profile</span>
+                    <span class="terminal-subtitle">{{ site.data.profile.personal.title }}</span>
+                </div>
             </div>
-            <div class="terminal-title">{{ site.data.profile.personal.username }}@{{ site.data.profile.personal.terminal_name }}-terminal:~$ Professional Profile</div>
-        </div>
+            <nav class="terminal-nav" aria-label="Primary navigation">
+                <a href="#welcome">Welcome</a>
+                <a href="#about">Profile</a>
+                <a href="#skills">Skills</a>
+                <a href="#experience">Experience</a>
+                <a href="#achievements">Achievements</a>
+                <a href="#terminal">Terminal</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </header>
 
         <!-- Terminal Content -->
         <div class="terminal-content">

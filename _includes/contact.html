@@ -5,21 +5,35 @@
         <span class="command">echo "Ready for opportunities!"</span>
     </div>
     <div class="command-output">
-        <div class="contact-info">
-            <h2 class="section-title"># Let's Connect</h2>
-            <p class="cta-text">{{ site.data.profile.cta_text }}</p>
-            <p class="cta-text">{{ site.data.profile.cta_description }}</p>
-            
-            <div class="contact-methods">
-                <a href="mailto:{{ site.data.profile.personal.email }}" class="contact-button">
-                    📧 Send Email
-                </a>
-                <a href="tel:{{ site.data.profile.personal.phone | replace: ' ', '' | replace: '(', '' | replace: ')', '' | replace: '-', '' }}" class="contact-button">
-                    📞 Call Me
-                </a>
-                <a href="{{ site.data.profile.personal.resume_file }}" target="_blank" class="contact-button">
-                    📄 Download Resume
-                </a>
+        <div class="panel contact-panel">
+            <div class="section-header">
+                <h2 class="section-title">Let’s collaborate</h2>
+                <p class="section-subtitle">{{ site.data.profile.cta_text }} — {{ site.data.profile.cta_description }}</p>
+            </div>
+            <div class="contact-body">
+                <div class="contact-primary">
+                    <div class="contact-channel">
+                        <span class="channel-label">Email</span>
+                        <a href="mailto:{{ site.data.profile.personal.email }}" class="channel-value">{{ site.data.profile.personal.email }}</a>
+                    </div>
+                    <div class="contact-channel">
+                        <span class="channel-label">Phone</span>
+                        <a href="tel:{{ site.data.profile.personal.phone | replace: ' ', '' | replace: '(', '' | replace: ')', '' | replace: '-', '' }}" class="channel-value">{{ site.data.profile.personal.phone }}</a>
+                    </div>
+                    <div class="contact-actions">
+                        <a href="mailto:{{ site.data.profile.personal.email }}" class="button button--primary">Book a call</a>
+                        <a href="{{ site.data.profile.personal.resume_file }}" target="_blank" rel="noopener" class="button button--ghost">Download resume</a>
+                    </div>
+                </div>
+                <div class="contact-secondary">
+                    <h3 class="contact-heading">Preferred collaboration topics</h3>
+                    <ul class="contact-list">
+                        {% for focus in site.data.profile.available_for %}
+                        <li>{{ focus }}</li>
+                        {% endfor %}
+                    </ul>
+                    <p class="contact-note">I respond within one business day for new opportunities and consulting requests.</p>
+                </div>
             </div>
         </div>
     </div>
