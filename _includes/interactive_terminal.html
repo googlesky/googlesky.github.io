@@ -1,14 +1,17 @@
 <!-- Interactive Terminal -->
 <section id="terminal" class="terminal-section">
-    <div class="interactive-terminal">
-        <h2 class="section-title"># Interactive Terminal</h2>
+    <div class="panel interactive-terminal">
+        <div class="section-header">
+            <h2 class="section-title">Interactive terminal</h2>
+            <p class="section-subtitle">Run portfolio-flavoured commands, discover highlights, and explore experience details in a familiar shell workflow.</p>
+        </div>
         <div class="terminal-output" id="terminal-output"></div>
         <div class="terminal-input-line">
             <span class="prompt-inline">
                 <span class="user">visitor@{{ site.data.profile.personal.username }}-terminal</span><span class="separator">:</span><span class="path">~</span><span class="dollar">$</span>
             </span>
-            <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false">
-            <span class="terminal-cursor">_</span>
+            <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" aria-label="Interactive terminal input">
+            <span class="terminal-cursor" aria-hidden="true">_</span>
         </div>
     </div>
 </section>

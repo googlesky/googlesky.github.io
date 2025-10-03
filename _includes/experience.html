@@ -5,19 +5,23 @@
         <span class="command">tail -f /var/log/career.log</span>
     </div>
     <div class="command-output">
-        <div class="experience-timeline">
-            <h2 class="section-title"># Professional Experience</h2>
-            
-            {% for job in site.data.profile.experience %}
-            <div class="log-entry">
-                <div class="log-timestamp">[{{ job.period }}]</div>
-                <div class="log-content">
-                    <h3 class="company">{{ job.company }} — {{ job.position }}</h3>
-                    <p>{{ job.description }}</p>
-                </div>
+        <div class="panel">
+            <div class="section-header">
+                <h2 class="section-title">Professional experience</h2>
+                <p class="section-subtitle">Hands-on leadership embedding DevOps, SRE, and platform automation across finance, ecommerce, and AI-driven products.</p>
             </div>
-            {% endfor %}
-
+            <ol class="career-timeline">
+                {% for job in site.data.profile.experience %}
+                <li class="timeline-item">
+                    <div class="timeline-meta">
+                        <span class="timeline-period">{{ job.period }}</span>
+                        <span class="timeline-company">{{ job.company }}</span>
+                    </div>
+                    <h3 class="timeline-role">{{ job.position }}</h3>
+                    <p class="timeline-description">{{ job.description }}</p>
+                </li>
+                {% endfor %}
+            </ol>
         </div>
     </div>
 </section>

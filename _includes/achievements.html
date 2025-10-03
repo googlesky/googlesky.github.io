@@ -5,18 +5,19 @@
         <span class="command">cat /var/log/achievements.log</span>
     </div>
     <div class="command-output">
-        <div class="achievements-timeline">
-            <h2 class="section-title"># Professional Achievements & Certifications</h2>
-            
-            {% for achievement in site.data.profile.achievements %}
-            <div class="log-entry">
-                <div class="log-timestamp">[{{ achievement.date }}]</div>
-                <div class="log-content">
-                    <h3 class="company">🏆 {{ achievement.title }}</h3>
-                </div>
+        <div class="panel">
+            <div class="section-header">
+                <h2 class="section-title">Achievements & certifications</h2>
+                <p class="section-subtitle">Milestones that reflect continuous improvement in automation, security, and delivery performance.</p>
             </div>
-            {% endfor %}
-
+            <ol class="achievement-timeline">
+                {% for achievement in site.data.profile.achievements %}
+                <li class="achievement-item">
+                    <span class="achievement-date">{{ achievement.date }}</span>
+                    <span class="achievement-title">{{ achievement.title }}</span>
+                </li>
+                {% endfor %}
+            </ol>
         </div>
     </div>
 </section>

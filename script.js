@@ -4,6 +4,7 @@ class TerminalEmulator {
         this.terminalOutput = document.getElementById('terminal-output');
         this.terminalInput = document.getElementById('terminal-input');
         this.currentTimeElement = document.getElementById('current-time');
+        this.terminalContainer = document.querySelector('.interactive-terminal');
         
         // Get profile data from Jekyll
         this.profileData = this.getProfileData();
@@ -63,6 +64,11 @@ class TerminalEmulator {
     }
 
     setupEventListeners() {
+        if (!this.terminalInput || !this.terminalOutput) {
+            console.warn('Interactive terminal elements are missing. Skipping terminal setup.');
+            return;
+        }
+
         this.terminalInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 this.processCommand();
@@ -80,22 +86,24 @@ class TerminalEmulator {
 
         // Focus input when clicking anywhere in terminal
         document.addEventListener('click', (e) => {
-            // Track external link clicks
-            if (e.target.tagName === 'A' && e.target.href) {
-                const linkType = this.getLinkType(e.target.href);
+            const link = e.target.closest('a');
+            if (link && link.href) {
+                const linkType = this.getLinkType(link.href);
                 this.trackEvent('External_Links', 'Link_Clicked', linkType);
                 
                 // Track specific high-value actions
-                if (e.target.href.includes('mailto:')) {
+                if (link.href.includes('mailto:')) {
                     this.trackEvent('Lead_Generation', 'Email_Clicked', 'contact_attempt');
-                } else if (e.target.href.includes('tel:')) {
+                } else if (link.href.includes('tel:')) {
                     this.trackEvent('Lead_Generation', 'Phone_Clicked', 'contact_attempt');
-                } else if (e.target.href.includes('.pdf')) {
+                } else if (link.href.includes('.pdf')) {
                     this.trackEvent('Lead_Generation', 'Resume_PDF_Clicked', 'document_download');
                 }
             }
-            
-            this.terminalInput.focus();
+
+            if (this.terminalContainer && this.terminalContainer.contains(e.target)) {
+                this.terminalInput.focus();
+            }
         });
 
         // Initial focus
@@ -133,6 +141,9 @@ class TerminalEmulator {
     }
 
     displayCommand(command) {
+        if (!this.terminalOutput) {
+            return;
+        }
         const commandLine = document.createElement('div');
         commandLine.className = 'terminal-command-line';
         commandLine.innerHTML = `
@@ -145,9 +156,12 @@ class TerminalEmulator {
     }
 
     displayOutput(content, type = 'normal') {
+        if (!this.terminalOutput) {
+            return;
+        }
         const output = document.createElement('div');
         output.className = `terminal-output-line ${type}`;
-        
+
         if (typeof content === 'string') {
             output.innerHTML = content;
         } else {
@@ -406,6 +420,10 @@ class TerminalEmulator {
 
     downloadResume() {
         const profile = this.profileData?.personal || {};
+        if (!profile.resume_file) {
+            this.displayOutput('<div class="resume-content">Resume is currently unavailable. Please check back soon.</div>', 'error');
+            return;
+        }
         this.trackPageInteraction('resume_download');
         this.trackEvent('Lead_Generation', 'Resume_Downloaded', 'high_intent_action');
         this.displayOutput(`
@@ -725,72 +743,73 @@ document.addEventListener('DOMContentLoaded', () => {
 // Add CSS for terminal command styling
 const additionalStyles = `
     .terminal-command-line {
-        margin-bottom: 5px;
+        margin-bottom: 8px;
         display: flex;
-        align-items: center;
-        gap: 5px;
+        align-items: baseline;
+        gap: 8px;
+        font-family: var(--font-mono, 'JetBrains Mono', monospace);
+        color: var(--text-secondary, #a9b6d8);
     }
 
     .prompt-output .user {
-        color: #00ff00;
-        text-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+        color: var(--accent, #57f1c1);
     }
 
-    .prompt-output .separator {
-        color: #ffffff;
+    .prompt-output .separator,
+    .prompt-output .dollar {
+        color: var(--text-muted, #6f7b97);
     }
 
     .prompt-output .path {
-        color: #00ffff;
-        text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
-    }
-
-    .prompt-output .dollar {
-        color: #ffffff;
+        color: var(--accent-blue, #58a6ff);
     }
 
     .command-text {
-        color: #ffff00;
-        text-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+        color: var(--accent, #57f1c1);
+        font-weight: 600;
     }
 
     .terminal-output-line {
-        margin-bottom: 10px;
-        padding-left: 20px;
-        border-left: 2px solid rgba(0, 255, 0, 0.2);
+        margin-bottom: 12px;
+        padding-left: 18px;
+        border-left: 2px solid rgba(88, 166, 255, 0.18);
+        color: var(--text-secondary, #a9b6d8);
     }
 
     .terminal-output-line.error {
         color: #ff6b6b;
-        border-left-color: rgba(255, 107, 107, 0.5);
+        border-left-color: rgba(255, 107, 107, 0.45);
     }
 
     .terminal-output-line.success {
-        color: #51cf66;
-        border-left-color: rgba(81, 207, 102, 0.5);
+        color: #4cd964;
+        border-left-color: rgba(76, 217, 100, 0.45);
     }
 
     .welcome-msg p {
         margin-bottom: 8px;
+        color: var(--text-secondary, #a9b6d8);
+    }
+
+    .welcome-msg p span {
+        color: var(--text-primary, #f7fbff);
     }
 
     .help-content h3 {
-        border-bottom: 1px solid rgba(0, 255, 255, 0.3);
-        padding-bottom: 5px;
+        border-bottom: 1px dashed rgba(88, 166, 255, 0.3);
+        padding-bottom: 6px;
+        color: var(--accent, #57f1c1);
+        margin-bottom: 16px;
     }
 
     .neofetch-content {
         align-items: flex-start;
+        gap: 18px;
     }
 
     @media (max-width: 768px) {
         .neofetch-content {
             flex-direction: column;
-            gap: 10px;
-        }
-        
-        .neofetch-content pre {
-            font-size: 8px;
         }
     }
 `;
