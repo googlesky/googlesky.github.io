@@ -216,9 +216,9 @@ class TerminalEmulator {
     showWelcomeMessage() {
         this.displayOutput(`
             <div class="welcome-msg">
-                <p style="color: #00ffff;">Welcome to ${this.profileData?.personal?.name || 'Lê Hiếu'}'s Interactive Terminal!</p>
-                <p>Type <span style="color: #ffff00;">'help'</span> to see available commands.</p>
-                <p style="color: #888; font-style: italic;">Tip: Use Tab for autocompletion, ↑↓ arrows for command history.</p>
+                <p style="color: #0a84ff;">Welcome to ${this.profileData?.personal?.name || 'Lê Hiếu'}'s Interactive Terminal!</p>
+                <p>Type <span style="color: #ff9f0a;">'help'</span> to see available commands.</p>
+                <p style="color: rgba(255, 255, 255, 0.6); font-style: italic;">Tip: Use Tab for autocompletion, ↑↓ arrows for command history.</p>
             </div>
         `);
     }
@@ -226,28 +226,28 @@ class TerminalEmulator {
     showHelp() {
         this.displayOutput(`
             <div class="help-content">
-                <h3 style="color: #00ffff; margin-bottom: 15px;">Available Commands:</h3>
-                <div style="display: grid; grid-template-columns: 150px 1fr; gap: 8px; color: #cccccc;">
-                    <span style="color: #00ff00;">help</span><span>Show this help message</span>
-                    <span style="color: #00ff00;">about</span><span>Display profile information</span>
-                    <span style="color: #00ff00;">skills</span><span>Show technical skills</span>
-                    <span style="color: #00ff00;">experience</span><span>Display work experience</span>
-                    <span style="color: #00ff00;">achievements</span><span>Show achievements & certifications</span>
-                    <span style="color: #00ff00;">projects</span><span>Show project portfolio</span>
-                    <span style="color: #00ff00;">contact</span><span>Get contact information</span>
-                    <span style="color: #00ff00;">social</span><span>Show social media links</span>
-                    <span style="color: #00ff00;">resume</span><span>Download resume</span>
-                    <span style="color: #00ff00;">hire</span><span>Why you should hire me</span>
-                    <span style="color: #00ff00;">clear</span><span>Clear terminal screen</span>
-                    <span style="color: #00ff00;">whoami</span><span>Display current user</span>
-                    <span style="color: #00ff00;">pwd</span><span>Print working directory</span>
-                    <span style="color: #00ff00;">ls</span><span>List directory contents</span>
-                    <span style="color: #00ff00;">date</span><span>Show current date and time</span>
-                    <span style="color: #00ff00;">uptime</span><span>Show system uptime</span>
-                    <span style="color: #00ff00;">neofetch</span><span>Display system information</span>
-                    <span style="color: #00ff00;">cat [file]</span><span>Display file contents</span>
-                    <span style="color: #00ff00;">echo [text]</span><span>Display text</span>
-                    <span style="color: #00ff00;">analytics</span><span>Show current session analytics</span>
+                <h3 class="terminal-inline-label" style="margin-bottom: 15px;">Available Commands</h3>
+                <div class="help-grid">
+                    <span class="terminal-inline-highlight">help</span><span class="terminal-inline-muted">Show this help message</span>
+                    <span class="terminal-inline-highlight">about</span><span class="terminal-inline-muted">Display profile information</span>
+                    <span class="terminal-inline-highlight">skills</span><span class="terminal-inline-muted">Show technical skills</span>
+                    <span class="terminal-inline-highlight">experience</span><span class="terminal-inline-muted">Display work experience</span>
+                    <span class="terminal-inline-highlight">achievements</span><span class="terminal-inline-muted">Show achievements & certifications</span>
+                    <span class="terminal-inline-highlight">projects</span><span class="terminal-inline-muted">Show project portfolio</span>
+                    <span class="terminal-inline-highlight">contact</span><span class="terminal-inline-muted">Get contact information</span>
+                    <span class="terminal-inline-highlight">social</span><span class="terminal-inline-muted">Show social media links</span>
+                    <span class="terminal-inline-highlight">resume</span><span class="terminal-inline-muted">Download resume</span>
+                    <span class="terminal-inline-highlight">hire</span><span class="terminal-inline-muted">Why you should hire me</span>
+                    <span class="terminal-inline-highlight">clear</span><span class="terminal-inline-muted">Clear terminal screen</span>
+                    <span class="terminal-inline-highlight">whoami</span><span class="terminal-inline-muted">Display current user</span>
+                    <span class="terminal-inline-highlight">pwd</span><span class="terminal-inline-muted">Print working directory</span>
+                    <span class="terminal-inline-highlight">ls</span><span class="terminal-inline-muted">List directory contents</span>
+                    <span class="terminal-inline-highlight">date</span><span class="terminal-inline-muted">Show current date and time</span>
+                    <span class="terminal-inline-highlight">uptime</span><span class="terminal-inline-muted">Show system uptime</span>
+                    <span class="terminal-inline-highlight">neofetch</span><span class="terminal-inline-muted">Display system information</span>
+                    <span class="terminal-inline-highlight">cat [file]</span><span class="terminal-inline-muted">Display file contents</span>
+                    <span class="terminal-inline-highlight">echo [text]</span><span class="terminal-inline-muted">Display text</span>
+                    <span class="terminal-inline-highlight">analytics</span><span class="terminal-inline-muted">Show current session analytics</span>
                 </div>
             </div>
         `);
@@ -258,14 +258,14 @@ class TerminalEmulator {
         this.trackPageInteraction('about_section');
         this.displayOutput(`
             <div class="about-content">
-                <h3 style="color: #00ffff; margin-bottom: 15px;">About ${profile.name || 'Lê Hiếu'}</h3>
-                <p><span style="color: #00ff00;">Name:</span> ${profile.name || 'Lê Hiếu'}</p>
-                <p><span style="color: #00ff00;">Title:</span> ${profile.title || 'Senior DevOps/SRE'}</p>
-                <p><span style="color: #00ff00;">Email:</span> ${profile.email || 'HIEULP@1DEVOPS.IO'}</p>
-                <p><span style="color: #00ff00;">Phone:</span> ${profile.phone || '(084) 975-669-775'}</p>
-                <p><span style="color: #00ff00;">Location:</span> ${profile.location || 'Thu Duc, Ho Chi Minh City, Vietnam'}</p>
-                <p><span style="color: #00ff00;">Experience:</span> 8+ years in DevOps, SRE, and System Administration</p>
-                <p style="margin-top: 15px; color: #cccccc;">
+                <h3 class="terminal-inline-label" style="margin-bottom: 15px;">About ${profile.name || 'Lê Hiếu'}</h3>
+                <p><span class="terminal-inline-label">Name:</span> ${profile.name || 'Lê Hiếu'}</p>
+                <p><span class="terminal-inline-label">Title:</span> ${profile.title || 'Senior DevOps/SRE'}</p>
+                <p><span class="terminal-inline-label">Email:</span> ${profile.email || 'HIEULP@1DEVOPS.IO'}</p>
+                <p><span class="terminal-inline-label">Phone:</span> ${profile.phone || '(084) 975-669-775'}</p>
+                <p><span class="terminal-inline-label">Location:</span> ${profile.location || 'Thu Duc, Ho Chi Minh City, Vietnam'}</p>
+                <p><span class="terminal-inline-label">Experience:</span> 8+ years in DevOps, SRE, and System Administration</p>
+                <p class="terminal-inline-muted" style="margin-top: 15px;">
                     ${this.profileData?.tagline || 'Passionate about cloud infrastructure, automation, AI/ML platforms, security, and building reliable systems at scale. Experienced with AWS, Azure, Kubernetes, Docker, Terraform, Golang, Python, and various cloud technologies.'}
                 </p>
             </div>
@@ -277,46 +277,46 @@ class TerminalEmulator {
         this.trackPageInteraction('skills_section');
         this.displayOutput(`
             <div class="skills-content">
-                <h3 style="color: #00ffff; margin-bottom: 15px;">Technical Skills</h3>
+                <h3 class="terminal-inline-label" style="margin-bottom: 15px;">Technical Skills</h3>
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">Programming Languages:</h4>
-                    <p style="color: #cccccc;">${(skills.programming || []).join(', ')}</p>
+                    <h4 class="terminal-inline-highlight">Programming Languages:</h4>
+                    <p class="terminal-inline-muted">${(skills.programming || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">CI/CD & Automation:</h4>
-                    <p style="color: #cccccc;">${(skills.cicd_automation || []).join(', ')}</p>
+                    <h4 class="terminal-inline-highlight">CI/CD & Automation:</h4>
+                    <p class="terminal-inline-muted">${(skills.cicd_automation || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">Operating Systems:</h4>
-                    <p style="color: #cccccc;">${(skills.operating_systems || []).join(', ')}</p>
+                    <h4 class="terminal-inline-highlight">Operating Systems:</h4>
+                    <p class="terminal-inline-muted">${(skills.operating_systems || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">Containers/Virtualization:</h4>
-                    <p style="color: #cccccc;">${(skills.containers_virtualization || []).join(', ')}</p>
+                    <h4 class="terminal-inline-highlight">Containers/Virtualization:</h4>
+                    <p class="terminal-inline-muted">${(skills.containers_virtualization || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">Databases:</h4>
-                    <p style="color: #cccccc;">${(skills.databases || []).join(', ')}</p>
+                    <h4 class="terminal-inline-highlight">Databases:</h4>
+                    <p class="terminal-inline-muted">${(skills.databases || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">Cloud Platforms:</h4>
-                    <p style="color: #cccccc;">${(skills.cloud_platforms || []).join(', ')}</p>
+                    <h4 class="terminal-inline-highlight">Cloud Platforms:</h4>
+                    <p class="terminal-inline-muted">${(skills.cloud_platforms || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">Networking:</h4>
-                    <p style="color: #cccccc;">${(skills.networking || []).join(', ')}</p>
+                    <h4 class="terminal-inline-highlight">Networking:</h4>
+                    <p class="terminal-inline-muted">${(skills.networking || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">Monitoring/Logging:</h4>
-                    <p style="color: #cccccc;">${(skills.monitoring_logging || []).join(', ')}</p>
+                    <h4 class="terminal-inline-highlight">Monitoring/Logging:</h4>
+                    <p class="terminal-inline-muted">${(skills.monitoring_logging || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">Security:</h4>
-                    <p style="color: #cccccc;">${(skills.security || []).join(', ')}</p>
+                    <h4 class="terminal-inline-highlight">Security:</h4>
+                    <p class="terminal-inline-muted">${(skills.security || []).join(', ')}</p>
                 </div>
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">Registry & Proxy:</h4>
-                    <p style="color: #cccccc;">${(skills.registry_proxy || []).join(', ')}</p>
+                    <h4 class="terminal-inline-highlight">Registry & Proxy:</h4>
+                    <p class="terminal-inline-muted">${(skills.registry_proxy || []).join(', ')}</p>
                 </div>
             </div>
         `);
@@ -326,14 +326,15 @@ class TerminalEmulator {
         const experience = this.profileData?.experience || [];
         let experienceHtml = `
             <div class="experience-content">
-                <h3 style="color: #00ffff; margin-bottom: 15px;">Professional Experience</h3>
+                <h3 class="terminal-inline-label" style="margin-bottom: 15px;">Professional Experience</h3>
         `;
         
         experience.forEach(job => {
             experienceHtml += `
-                <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">${job.company} — ${job.position} (${job.period})</h4>
-                    <p style="color: #cccccc;">${job.description}</p>
+                <div style="margin-bottom: 18px;">
+                    <p class="terminal-inline-highlight" style="margin: 0;">${job.company} — ${job.position}</p>
+                    <p class="terminal-inline-muted" style="margin: 2px 0 8px;">${job.period}</p>
+                    <p class="terminal-inline-text" style="margin: 0;">${job.description}</p>
                 </div>
             `;
         });
@@ -346,14 +347,14 @@ class TerminalEmulator {
         const achievements = this.profileData?.achievements || [];
         let achievementsHtml = `
             <div class="achievements-content">
-                <h3 style="color: #00ffff; margin-bottom: 15px;">🏆 Professional Achievements & Certifications</h3>
+                <h3 class="terminal-inline-label" style="margin-bottom: 15px;">🏆 Professional Achievements & Certifications</h3>
         `;
         
         achievements.forEach(achievement => {
             achievementsHtml += `
-                <div class="achievement-item">
-                    <span class="achievement-date">${achievement.date}</span> 🌟 <span class="achievement-title">${achievement.title}</span>
-                </div>
+                <p class="terminal-inline-text" style="margin-bottom: 10px;">
+                    <span class="terminal-inline-label">${achievement.date}</span> · <span>${achievement.title}</span>
+                </p>
             `;
         });
         
@@ -365,14 +366,14 @@ class TerminalEmulator {
         const projects = this.profileData?.projects || [];
         let projectsHtml = `
             <div class="projects-content">
-                <h3 style="color: #00ffff; margin-bottom: 15px;">Notable Projects</h3>
+                <h3 class="terminal-inline-label" style="margin-bottom: 15px;">Notable Projects</h3>
         `;
         
         projects.forEach(project => {
             projectsHtml += `
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: #ffff00;">${project.title}</h4>
-                    <p style="color: #cccccc;">${project.description}</p>
+                    <p class="terminal-inline-highlight" style="margin: 0;">${project.title}</p>
+                    <p class="terminal-inline-text" style="margin: 4px 0 0;">${project.description}</p>
                 </div>
             `;
         });
@@ -389,14 +390,14 @@ class TerminalEmulator {
         this.trackEvent('Lead_Generation', 'Contact_Viewed', 'potential_lead');
         this.displayOutput(`
             <div class="contact-content">
-                <h3 style="color: #00ffff; margin-bottom: 15px;">Contact Information</h3>
-                <p><span style="color: #00ff00;">📧 Email:</span> <a href="mailto:${profile.email}" style="color: #ffff00;">${profile.email}</a></p>
-                <p><span style="color: #00ff00;">📞 Phone:</span> <a href="tel:${profile.phone?.replace(/[^\d+]/g, '')}" style="color: #ffff00;">${profile.phone}</a></p>
-                <p><span style="color: #00ff00;">🌍 Location:</span> ${profile.location}</p>
-                <p><span style="color: #00ff00;">📄 Resume:</span> <a href="${profile.resume_file}" target="_blank" style="color: #ffff00;">Download PDF</a></p>
+                <h3 class="terminal-inline-label" style="margin-bottom: 15px;">Contact Information</h3>
+                <p><span class="terminal-inline-label">📧 Email:</span> <a href="mailto:${profile.email}" class="terminal-inline-highlight">${profile.email}</a></p>
+                <p><span class="terminal-inline-label">📞 Phone:</span> <a href="tel:${profile.phone?.replace(/[^\d+]/g, '')}" class="terminal-inline-highlight">${profile.phone}</a></p>
+                <p><span class="terminal-inline-label">🌍 Location:</span> <span class="terminal-inline-text">${profile.location}</span></p>
+                <p><span class="terminal-inline-label">📄 Resume:</span> <a href="${profile.resume_file}" target="_blank" class="terminal-inline-highlight">Download PDF</a></p>
                 <br>
-                <p style="color: #00ffff;">💡 Available for:</p>
-                <ul style="color: #cccccc; margin-left: 20px;">
+                <p class="terminal-inline-label">💡 Available for:</p>
+                <ul class="terminal-inline-text" style="margin-left: 20px;">
                     ${availableFor.map(item => `<li>${item}</li>`).join('')}
                 </ul>
             </div>
@@ -407,13 +408,13 @@ class TerminalEmulator {
         const social = this.profileData?.social || {};
         this.displayOutput(`
             <div class="social-content">
-                <h3 style="color: #00ffff; margin-bottom: 15px;">Social Networks</h3>
-                <p><span style="color: #00ff00;">💼 LinkedIn:</span> <a href="${social.linkedin}" target="_blank" style="color: #ffff00;">${social.linkedin}</a></p>
-                <p><span style="color: #00ff00;">🐙 GitHub:</span> <a href="${social.github}" target="_blank" style="color: #ffff00;">${social.github}</a></p>
-                <p><span style="color: #00ff00;">✈️ Telegram:</span> <a href="${social.telegram}" target="_blank" style="color: #ffff00;">${social.telegram}</a></p>
-                <p><span style="color: #00ff00;">🦊 GitLab:</span> <a href="${social.gitlab}" target="_blank" style="color: #ffff00;">${social.gitlab}</a></p>
-                <p><span style="color: #00ff00;">🪣 Bitbucket:</span> <a href="${social.bitbucket}" target="_blank" style="color: #ffff00;">${social.bitbucket}</a></p>
-                <p><span style="color: #00ff00;">📚 Stack Overflow:</span> <a href="${social.stackoverflow}" target="_blank" style="color: #ffff00;">${social.stackoverflow}</a></p>
+                <h3 class="terminal-inline-label" style="margin-bottom: 15px;">Social Networks</h3>
+                <p><span class="terminal-inline-label">💼 LinkedIn:</span> <a href="${social.linkedin}" target="_blank" class="terminal-inline-highlight">${social.linkedin}</a></p>
+                <p><span class="terminal-inline-label">🐙 GitHub:</span> <a href="${social.github}" target="_blank" class="terminal-inline-highlight">${social.github}</a></p>
+                <p><span class="terminal-inline-label">✈️ Telegram:</span> <a href="${social.telegram}" target="_blank" class="terminal-inline-highlight">${social.telegram}</a></p>
+                <p><span class="terminal-inline-label">🦊 GitLab:</span> <a href="${social.gitlab}" target="_blank" class="terminal-inline-highlight">${social.gitlab}</a></p>
+                <p><span class="terminal-inline-label">🪣 Bitbucket:</span> <a href="${social.bitbucket}" target="_blank" class="terminal-inline-highlight">${social.bitbucket}</a></p>
+                <p><span class="terminal-inline-label">📚 Stack Overflow:</span> <a href="${social.stackoverflow}" target="_blank" class="terminal-inline-highlight">${social.stackoverflow}</a></p>
             </div>
         `);
     }
@@ -428,9 +429,9 @@ class TerminalEmulator {
         this.trackEvent('Lead_Generation', 'Resume_Downloaded', 'high_intent_action');
         this.displayOutput(`
             <div class="resume-content">
-                <p style="color: #00ffff;">📄 Opening resume download...</p>
-                <p style="color: #cccccc;">File: ${profile.resume_file}</p>
-                <p><a href="${profile.resume_file}" target="_blank" style="color: #ffff00;">Click here if download doesn't start automatically</a></p>
+                <p class="terminal-inline-label">📄 Opening resume download...</p>
+                <p class="terminal-inline-text">File: ${profile.resume_file}</p>
+                <p><a href="${profile.resume_file}" target="_blank" class="terminal-inline-highlight">Click here if download doesn't start automatically</a></p>
             </div>
         `);
         
@@ -450,8 +451,8 @@ class TerminalEmulator {
         
         let hireHtml = `
             <div class="hire-content">
-                <h3 style="color: #00ffff; margin-bottom: 15px;">Why Hire ${profile.name || 'Lê Hiếu'}?</h3>
-                <ul style="color: #cccccc; margin-left: 20px;">
+                <h3 class="terminal-inline-label" style="margin-bottom: 15px;">Why Hire ${profile.name || 'Lê Hiếu'}?</h3>
+                <ul class="terminal-inline-text" style="margin-left: 20px;">
         `;
         
         hireReasons.forEach(reason => {
@@ -461,8 +462,8 @@ class TerminalEmulator {
         hireHtml += `
                 </ul>
                 <br>
-                <p style="color: #00ff00;">${conclusion}</p>
-                <p style="color: #ffff00;">Contact: ${profile.email} | ${profile.phone}</p>
+                <p class="terminal-inline-label">${conclusion}</p>
+                <p class="terminal-inline-highlight">Contact: ${profile.email} | ${profile.phone}</p>
             </div>
         `;
         
@@ -475,12 +476,12 @@ class TerminalEmulator {
     }
 
     whoAmI() {
-        this.displayOutput('<span style="color: #00ff00;">visitor</span>');
+        this.displayOutput('<span class="terminal-inline-highlight">visitor</span>');
     }
 
     printWorkingDirectory() {
         const username = this.profileData?.personal?.username || 'hieule';
-        this.displayOutput(`<span style="color: #00ffff;">/home/${username}/portfolio</span>`);
+        this.displayOutput(`<span class="terminal-inline-path">/home/${username}/portfolio</span>`);
     }
 
     listDirectory() {
@@ -488,15 +489,15 @@ class TerminalEmulator {
         const resumeFile = this.profileData?.personal?.resume_file || 'LePhuongHieu_DevOps_Resume_v3.pdf';
         
         this.displayOutput(`
-            <div style="color: #cccccc;">
-                <div style="color: #00ffff;">drwxr-xr-x 2 ${username} ${username} 4096 Dec  7 16:10 <span style="color: #ffff00;">about/</span></div>
-                <div style="color: #00ffff;">drwxr-xr-x 2 ${username} ${username} 4096 Dec  7 16:10 <span style="color: #ffff00;">skills/</span></div>
-                <div style="color: #00ffff;">drwxr-xr-x 2 ${username} ${username} 4096 Dec  7 16:10 <span style="color: #ffff00;">experience/</span></div>
-                <div style="color: #00ffff;">drwxr-xr-x 2 ${username} ${username} 4096 Dec  7 16:10 <span style="color: #ffff00;">achievements/</span></div>
-                <div style="color: #00ffff;">drwxr-xr-x 2 ${username} ${username} 4096 Dec  7 16:10 <span style="color: #ffff00;">projects/</span></div>
-                <div style="color: #00ffff;">-rw-r--r-- 1 ${username} ${username} 2048 Dec  7 16:10 <span style="color: #ffffff;">README.md</span></div>
-                <div style="color: #00ffff;">-rw-r--r-- 1 ${username} ${username} 1024 Dec  7 16:10 <span style="color: #ffffff;">contact.txt</span></div>
-                <div style="color: #00ffff;">-rw-r--r-- 1 ${username} ${username} 4096 Dec  7 16:10 <span style="color: #ff0000;">${resumeFile}</span></div>
+            <div class="terminal-inline-text">
+                <div><span class="terminal-inline-path">drwxr-xr-x</span> 2 ${username} ${username} 4096 Dec  7 16:10 <span class="terminal-inline-highlight">about/</span></div>
+                <div><span class="terminal-inline-path">drwxr-xr-x</span> 2 ${username} ${username} 4096 Dec  7 16:10 <span class="terminal-inline-highlight">skills/</span></div>
+                <div><span class="terminal-inline-path">drwxr-xr-x</span> 2 ${username} ${username} 4096 Dec  7 16:10 <span class="terminal-inline-highlight">experience/</span></div>
+                <div><span class="terminal-inline-path">drwxr-xr-x</span> 2 ${username} ${username} 4096 Dec  7 16:10 <span class="terminal-inline-highlight">achievements/</span></div>
+                <div><span class="terminal-inline-path">drwxr-xr-x</span> 2 ${username} ${username} 4096 Dec  7 16:10 <span class="terminal-inline-highlight">projects/</span></div>
+                <div><span class="terminal-inline-path">-rw-r--r--</span> 1 ${username} ${username} 2048 Dec  7 16:10 <span>README.md</span></div>
+                <div><span class="terminal-inline-path">-rw-r--r--</span> 1 ${username} ${username} 1024 Dec  7 16:10 <span>contact.txt</span></div>
+                <div><span class="terminal-inline-path">-rw-r--r--</span> 1 ${username} ${username} 4096 Dec  7 16:10 <span class="terminal-inline-danger">${resumeFile}</span></div>
             </div>
         `);
     }
@@ -517,7 +518,7 @@ class TerminalEmulator {
         };
 
         if (files[filename]) {
-            this.displayOutput(`<pre style="color: #cccccc; white-space: pre-wrap;">${files[filename]}</pre>`);
+            this.displayOutput(`<pre class="terminal-inline-text" style="white-space: pre-wrap;">${files[filename]}</pre>`);
         } else {
             this.displayOutput(`cat: ${args[0]}: No such file or directory`, 'error');
         }
@@ -527,13 +528,13 @@ class TerminalEmulator {
         if (!args || args.length === 0) {
             this.displayOutput('');
         } else {
-            this.displayOutput(`<span style="color: #cccccc;">${args.join(' ')}</span>`);
+            this.displayOutput(`<span class="terminal-inline-text">${args.join(' ')}</span>`);
         }
     }
 
     showDate() {
         const now = new Date();
-        this.displayOutput(`<span style="color: #00ffff;">${now.toString()}</span>`);
+        this.displayOutput(`<span class="terminal-inline-path">${now.toString()}</span>`);
     }
 
     showUptime() {
@@ -543,7 +544,7 @@ class TerminalEmulator {
         const minutes = Math.floor((uptime % 3600) / 60);
         const seconds = uptime % 60;
         
-        this.displayOutput(`<span style="color: #00ffff;">up ${hours}h ${minutes}m ${seconds}s, load average: 0.15, 0.12, 0.08</span>`);
+        this.displayOutput(`<span class="terminal-inline-path">up ${hours}h ${minutes}m ${seconds}s, load average: 0.15, 0.12, 0.08</span>`);
     }
 
     showNeofetch() {
@@ -552,20 +553,20 @@ class TerminalEmulator {
         
         this.displayOutput(`
             <div class="neofetch-content" style="display: flex; gap: 20px;">
-                <pre style="color: #00ffff; font-size: 10px;">
+                <pre class="terminal-inline-path" style="font-size: 10px;">
      .-.-.   .-.-.   .-.-.   .-.-.   .-.-.
     ( H | L )( I | E )( U | . )( L | E )
      \`-'\`   \`-'\`   \`-'\`   \`-'\`   \`-'\`
                 </pre>
-                <div style="color: #cccccc;">
-                    <p><span style="color: #00ff00;">User:</span> ${profile.name || 'Lê Hiếu'}</p>
-                    <p><span style="color: #00ff00;">Title:</span> ${profile.title || 'Senior DevOps/SRE'}</p>
-                    <p><span style="color: #00ff00;">OS:</span> Linux Terminal Environment</p>
-                    <p><span style="color: #00ff00;">Shell:</span> Interactive Portfolio Terminal</p>
-                    <p><span style="color: #00ff00;">Languages:</span> ${(skills.programming || []).join(', ')}</p>
-                    <p><span style="color: #00ff00;">Cloud:</span> ${(skills.cloud_platforms || []).join(', ')}</p>
-                    <p><span style="color: #00ff00;">DevOps:</span> ${(skills.containers_virtualization || []).join(', ')}</p>
-                    <p><span style="color: #00ff00;">Status:</span> Available for hire</p>
+                <div class="terminal-inline-text">
+                    <p><span class="terminal-inline-label">User:</span> ${profile.name || 'Lê Hiếu'}</p>
+                    <p><span class="terminal-inline-label">Title:</span> ${profile.title || 'Senior DevOps/SRE'}</p>
+                    <p><span class="terminal-inline-label">OS:</span> macOS-style Portfolio Terminal</p>
+                    <p><span class="terminal-inline-label">Shell:</span> Interactive Profile Shell</p>
+                    <p><span class="terminal-inline-label">Languages:</span> ${(skills.programming || []).join(', ')}</p>
+                    <p><span class="terminal-inline-label">Cloud:</span> ${(skills.cloud_platforms || []).join(', ')}</p>
+                    <p><span class="terminal-inline-label">DevOps:</span> ${(skills.containers_virtualization || []).join(', ')}</p>
+                    <p><span class="terminal-inline-label">Status:</span> Available for hire</p>
                 </div>
             </div>
         `);
@@ -582,11 +583,11 @@ class TerminalEmulator {
         
         if (command === 'hire') {
             this.displayOutput(`
-                <div style="color: #ff0000;">
-                    <p>[sudo] password for visitor: ••••••••</p>
-                    <p style="color: #00ff00;">Access granted! Executing privileged hire command...</p>
-                    <p style="color: #ffff00;">🚨 ALERT: Exceptional DevOps engineer detected!</p>
-                    <p style="color: #00ffff;">Contact ${profile.email} immediately for interview.</p>
+                <div>
+                    <p class="terminal-inline-danger">[sudo] password for visitor: ••••••••</p>
+                    <p class="terminal-inline-label">Access granted! Executing privileged hire command...</p>
+                    <p class="terminal-inline-highlight">🚨 ALERT: Exceptional DevOps engineer detected!</p>
+                    <p class="terminal-inline-path">Contact ${profile.email} immediately for interview.</p>
                 </div>
             `);
         } else {
@@ -698,16 +699,16 @@ class TerminalEmulator {
         this.trackPageInteraction('analytics_dashboard');
         this.displayOutput(`
             <div class="analytics-content">
-                <h3 style="color: #00ffff; margin-bottom: 15px;">📊 Current Session Analytics</h3>
-                <div style="color: #cccccc;">
-                    <p><span style="color: #00ff00;">Session ID:</span> ${this.sessionId}</p>
-                    <p><span style="color: #00ff00;">Time on Site:</span> ${minutes}m ${seconds}s</p>
-                    <p><span style="color: #00ff00;">Commands Executed:</span> ${this.commandCount}</p>
-                    <p><span style="color: #00ff00;">Start Time:</span> ${this.startTime.toLocaleString()}</p>
+                <h3 class="terminal-inline-label" style="margin-bottom: 15px;">📊 Current Session Analytics</h3>
+                <div class="terminal-inline-text">
+                    <p><span class="terminal-inline-label">Session ID:</span> ${this.sessionId}</p>
+                    <p><span class="terminal-inline-label">Time on Site:</span> ${minutes}m ${seconds}s</p>
+                    <p><span class="terminal-inline-label">Commands Executed:</span> ${this.commandCount}</p>
+                    <p><span class="terminal-inline-label">Start Time:</span> ${this.startTime.toLocaleString()}</p>
                 </div>
                 
-                <h4 style="color: #ffff00; margin-top: 15px;">What We Track:</h4>
-                <ul style="color: #cccccc; margin-left: 20px;">
+                <h4 class="terminal-inline-highlight" style="margin-top: 15px;">What We Track:</h4>
+                <ul class="terminal-inline-text" style="margin-left: 20px;">
                     <li>Every command you run in the terminal</li>
                     <li>Which sections you explore (about, skills, experience, etc.)</li>
                     <li>Time spent on the site and engagement level</li>
@@ -716,17 +717,17 @@ class TerminalEmulator {
                     <li>Command categories and usage patterns</li>
                 </ul>
                 
-                <h4 style="color: #ffff00; margin-top: 15px;">Analytics Categories:</h4>
-                <ul style="color: #cccccc; margin-left: 20px;">
-                    <li><span style="color: #00ff00;">Terminal:</span> All command executions</li>
-                    <li><span style="color: #00ff00;">User_Engagement:</span> Session duration, command frequency</li>
-                    <li><span style="color: #00ff00;">Page_Interaction:</span> Section views</li>
-                    <li><span style="color: #00ff00;">Lead_Generation:</span> High-value actions (contact, hire, resume)</li>
-                    <li><span style="color: #00ff00;">External_Links:</span> Social media and external clicks</li>
-                    <li><span style="color: #00ff00;">Command_Category:</span> Grouped command analysis</li>
+                <h4 class="terminal-inline-highlight" style="margin-top: 15px;">Analytics Categories:</h4>
+                <ul class="terminal-inline-text" style="margin-left: 20px;">
+                    <li><span class="terminal-inline-label">Terminal:</span> All command executions</li>
+                    <li><span class="terminal-inline-label">User_Engagement:</span> Session duration, command frequency</li>
+                    <li><span class="terminal-inline-label">Page_Interaction:</span> Section views</li>
+                    <li><span class="terminal-inline-label">Lead_Generation:</span> High-value actions (contact, hire, resume)</li>
+                    <li><span class="terminal-inline-label">External_Links:</span> Social media and external clicks</li>
+                    <li><span class="terminal-inline-label">Command_Category:</span> Grouped command analysis</li>
                 </ul>
                 
-                <p style="color: #888; margin-top: 15px; font-style: italic;">
+                <p class="terminal-inline-muted" style="margin-top: 15px; font-style: italic;">
                     All data is used to improve user experience and understand visitor behavior.
                     Check Google Analytics for detailed insights!
                 </p>
@@ -748,32 +749,32 @@ const additionalStyles = `
         align-items: baseline;
         gap: 8px;
         font-family: var(--font-mono, 'JetBrains Mono', monospace);
-        color: var(--text-secondary, #a9b6d8);
+        color: rgba(243, 245, 250, 0.82);
     }
 
     .prompt-output .user {
-        color: var(--accent, #57f1c1);
+        color: rgba(107, 176, 255, 0.9);
     }
 
     .prompt-output .separator,
     .prompt-output .dollar {
-        color: var(--text-muted, #6f7b97);
+        color: rgba(149, 160, 185, 0.7);
     }
 
     .prompt-output .path {
-        color: var(--accent-blue, #58a6ff);
+        color: rgba(133, 196, 255, 0.92);
     }
 
     .command-text {
-        color: var(--accent, #57f1c1);
+        color: #ff9f0a;
         font-weight: 600;
     }
 
     .terminal-output-line {
         margin-bottom: 12px;
         padding-left: 18px;
-        border-left: 2px solid rgba(88, 166, 255, 0.18);
-        color: var(--text-secondary, #a9b6d8);
+        border-left: 2px solid rgba(107, 176, 255, 0.3);
+        color: rgba(243, 245, 250, 0.82);
     }
 
     .terminal-output-line.error {
@@ -811,6 +812,41 @@ const additionalStyles = `
         .neofetch-content {
             flex-direction: column;
         }
+    }
+
+    .help-grid {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 8px;
+        color: rgba(243, 245, 250, 0.82);
+    }
+
+    .terminal-inline-label {
+        color: rgba(107, 176, 255, 0.9);
+        font-weight: 600;
+    }
+
+    .terminal-inline-highlight {
+        color: #ff9f0a;
+        font-weight: 600;
+    }
+
+    .terminal-inline-muted {
+        color: rgba(255, 255, 255, 0.65);
+    }
+
+    .terminal-inline-text {
+        color: rgba(243, 245, 250, 0.82);
+    }
+
+    .terminal-inline-path {
+        color: rgba(133, 196, 255, 0.92);
+        font-weight: 600;
+    }
+
+    .terminal-inline-danger {
+        color: #ff453a;
+        font-weight: 600;
     }
 `;
 
